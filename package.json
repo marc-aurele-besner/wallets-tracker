@@ -1,0 +1,33 @@
+{
+  "name": "wallets-tracker",
+  "version": "1.0.0",
+  "description": "Track wallets activity across multiple chains.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marc-aurele-besner/wallets-tracker.git"
+  },
+  "author": "Marc-Aurele Besner <82244926+marc-aurele-besner@users.noreply.github.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/marc-aurele-besner/wallets-tracker/issues"
+  },
+  "keywords": [
+    "wallets",
+    "tracker",
+    "blockchain",
+    "ethereum"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "hardhat": "^2.11.1",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "ethers": "^5.7.0"
+  }
+}

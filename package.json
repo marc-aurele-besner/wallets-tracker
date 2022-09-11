@@ -19,7 +19,8 @@
     "ethereum"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier-scripts": "prettier --write scripts/",
+    "track": "npx hardhat run scripts/trackWallets.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",

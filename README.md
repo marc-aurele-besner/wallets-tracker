@@ -4,6 +4,27 @@
 
 Track Wallets balance (for native currency) on multiple chain and send report daily via GitHut Action.
 
+
+## Clone or fork this repository
+
+```
+git clone https://github.com/marc-aurele-besner/wallets-tracker.git
+cd wallets-tracker
+```
+
+OR
+
+```
+git repo fork https://github.com/marc-aurele-besner/wallets-tracker.git
+cd wallets-tracker
+```
+
+## Install dependencies
+
+```
+npm i
+```
+
 ## Add environment variables
 
 Copy .env.development.sample, rename it .env.development and fill it with your information

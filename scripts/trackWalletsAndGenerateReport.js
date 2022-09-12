@@ -6,54 +6,51 @@ async function main() {
   const addresses = helper.getAddressToTrack();
   const finalResults = await helper.getBalancesOfAddresses(networks, addresses);
   let exportResults = `
-  <!DOCTYPE HTML>
-  <HTML>
-  <HEAD>
-    <TITLE>Wallets Balances</TITLE>
-    <STYLE>
-      H1, H2, H3 {
-        font-family: arial, sans-serif;
-      }
+<style>
+  h1, h2, h3 {
+    font-family: arial, sans-serif;
+  }
 
-      TABLE {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-      
-      TD, TH {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-      }
-      
-      TR:nth-child(even) {
-        background-color: #dddddd;
-      }
-    </STYLE>
-  </HEAD>
-  <BODY>
-    <H1>Wallets Balances</H1>`;
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+# Wallets Balances`;
   // Get env variables to send email status
   const { SEND_EMAIL } = process.env;
 
   if (SEND_EMAIL === 'true') {
-    exportResults += `<H2>Networks to track</H2>
-    <TABLE>
-      <TR>
-        <TH>Network</TH>
-        <TH>ChainId</TH>
-        <TH>RPC URL</TH>
-      </TR>`;
+    exportResults += `
+## Networks to track
+<table>
+  <tr>
+    <th>Network</th>
+    <th>ChainId</th>
+    <th>RPC URL</th>
+  </tr>`;
     for (network of networks) {
-      exportResults += `<TR>
-        <TD>${network.name}</TD>
-        <TD>${network.chainId}</TD>
-        <TD>${network.url}</TD>
-      </TR>`;
+      exportResults += `
+  <tr>
+    <td>${network.name}</td>
+    <td>${network.chainId}</td>
+    <td>${network.url}</td>
+  </tr>`;
     }
-    exportResults += `<H3>Querying balance for ${addresses.length} addresses</H3>
-    </TABLE>`;
+    exportResults += `
+## Querying balance for ${addresses.length} addresses
+</table>`;
   } else {
     // Console log result
     console.log("Networks to track: ");
@@ -71,21 +68,24 @@ async function main() {
       };
     });
     if (SEND_EMAIL === 'true') {
-      exportResults += `<H2>Balance of ${address}</H2>
-      <TABLE>
-        <TR>
-          <TH>Network</TH>
-          <TH>ChainId</TH>
-          <TH>Balance</TH>
-        </TR>`;
+      exportResults += `
+## Balance of ${address}
+<table>
+  <tr>
+    <th>Network</th>
+    <th>ChainId</th>
+    <th>Balance</th>
+  </tr>`;
       for (balance of balancesList) {
-        exportResults += `<TR>
-            <TD>${balance.network}</TD>
-            <TD>${balance.chainId}</TD>
-            <TD>${balance.balance}</TD>
-          </TR>`;
+        exportResults += `
+  <tr>
+    <td>${balance.network}</td>
+    <td>${balance.chainId}</td>
+    <td>${balance.balance}</td>
+  </tr>`;
       }
-      exportResults += `</TABLE>`;
+      exportResults += `
+</table>`;
     } else {
       // Console log result
       console.log("Balance of ", address);
@@ -93,12 +93,10 @@ async function main() {
     }
   }
   if (SEND_EMAIL === 'true') {
-    exportResults += `</BODY>
-    </HTML>`;
     // Create folder if not exists
     if (!fs.existsSync('exports')) fs.mkdirSync('exports');
     // Create file
-    fs.writeFileSync('exports/export.html', exportResults);
+    fs.writeFileSync('exports/export.md', exportResults);
   }
   console.log(`Scrip executed`);
 }

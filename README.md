@@ -2,7 +2,7 @@
 
 # Wallets-Tracker
 
-Track Wallets balance (for native currency) on multiple chain and send report daily via GitHut Action.
+Track Wallets balance (for native currency) on multiple chain and send report daily by email via GitHut Action.
 
 
 ## Clone or fork this repository
@@ -38,7 +38,9 @@ npm run track
 ## Run the report locally with result in exports/export.md
 
 ```
-npm run trackAndSendReport
+npm run generateReport
 ```
 
+## Setup GitHub secrets
 
+Create GitHub secrets with all the environment variables to activate the daily workflows.

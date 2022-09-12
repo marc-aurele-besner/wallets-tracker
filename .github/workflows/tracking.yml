@@ -4,6 +4,7 @@ on:
   schedule:
     # Runs "at minute 55 past every hour" (see https://crontab.guru)
     - cron: '30 6 * * *'
+  workflow_dispatch:
 
 env:
   SEND_EMAIL: true

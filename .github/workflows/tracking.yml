@@ -41,7 +41,7 @@ jobs:
       - name: NPM Install
         run: npm install
       - name: Generate Report
-        run: npm run trackAndSendReport
+        run: npm run generateReport
       - name: Send Report
         uses: dawidd6/action-send-mail@v3
         with:
@@ -72,7 +72,7 @@ jobs:
           # Optional plain body:
           # body: Build job of ${{github.repository}} completed successfully!
           # Optional HTML body read from file:
-          html_body: file://mockexport.html
+          html_body: file://README.md
           # Optional carbon copy recipients:
           # cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients:

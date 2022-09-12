@@ -1,0 +1,90 @@
+name: Track Wallet Daily
+
+on:
+  schedule:
+    # Runs "at minute 55 past every hour" (see https://crontab.guru)
+    - cron: '30 6 * * *'
+
+env:
+  SEND_EMAIL: true
+  DUMMY_PRIVATE_KEY: ${{secrets.DUMMY_PRIVATE_KEY}}
+
+  # Wallets to track
+  TRACKING_PERSONAL_WALLET: ${{secrets.TRACKING_PERSONAL_WALLET}}
+  TRACKING_OTHERS_WALLET: ${{secrets.TRACKING_OTHERS_WALLET}}
+
+  # Public Mainet RPC Urls
+  RPC_ETHEREUM: ${{secrets.RPC_ETHEREUM}}
+  RPC_POLYGON: ${{secrets.RPC_POLYGON}}
+  RPC_BINANCE: ${{secrets.RPC_BINANCE}}
+  RPC_OPTIMISM: ${{secrets.RPC_OPTIMISM}}
+  RPC_AVALANCHE: ${{secrets.RPC_AVALANCHE}}
+
+  # Testnet RPC Urls
+  RPC_ROPSTEIN: ${{secrets.RPC_ROPSTEIN}}
+  RPC_RINKEBY: ${{secrets.RPC_RINKEBY}}
+  RPC_GOERLI: ${{secrets.RPC_GOERLI}}
+  RPC_KOVAN: ${{secrets.RPC_KOVAN}}
+  RPC_MUMBAI: ${{secrets.RPC_MUMBAI}}
+  RPC_BINANCE_TESTNET: ${{secrets.RPC_BINANCE_TESTNET}}
+  RPC_OPTIMISM_TESTNET: ${{secrets.RPC_OPTIMISM_TESTNET}}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: NPM Clean Install
+        run: npm ci
+      - name: Run test
+        run: npm run trackAndSendReport
+      - name: Send Report
+      - uses: dawidd6/action-send-mail@v3
+        with:
+          # Specify connection via URL (replaces server_address, server_port, secure,
+          # username and password)
+          #
+          # Format:
+          #
+          #  * smtp://user:password@server:port
+          #  * smtp+starttls://user:password@server:port
+          connection_url: ${{secrets.MAIL_CONNECTION}}
+          # Required mail server address if not connection_url:
+          server_address: smtp.gmail.com
+          # Server port, default 25:
+          server_port: 465
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional (recommended): mail server username:
+          username: ${{secrets.MAIL_USERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.MAIL_PASSWORD}}
+          # Required mail subject:
+          subject: Github Actions job result
+          # Required recipients' addresses:
+          to: obiwan@example.com,yoda@example.com
+          # Required sender full name (address can be skipped):
+          from: Luke Skywalker # <user@example.com>
+          # Optional plain body:
+          body: Build job of ${{github.repository}} completed successfully!
+          # Optional HTML body read from file:
+          html_body: file://README.html
+          # Optional carbon copy recipients:
+          cc: kyloren@example.com,leia@example.com
+          # Optional blind carbon copy recipients:
+          bcc: r2d2@example.com,hansolo@example.com
+          # Optional recipient of the email response:
+          reply_to: luke@example.com
+          # Optional Message ID this message is replying to:
+          in_reply_to: <random-luke@example.com>
+          # Optional unsigned/invalid certificates allowance:
+          ignore_cert: true
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          attachments: attachments.zip,git.diff,./dist/static/*.js
+          # Optional priority: 'high', 'normal' (default) or 'low'
+          priority: low

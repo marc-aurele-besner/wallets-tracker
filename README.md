@@ -35,7 +35,7 @@ Copy .env.development.sample, rename it .env.development and fill it with your i
 npm run track
 ```
 
-## Run the report locally with result in exports/export.html
+## Run the report locally with result in exports/export.md
 
 ```
 npm run generateReport

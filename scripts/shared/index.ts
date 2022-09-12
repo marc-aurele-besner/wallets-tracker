@@ -1,8 +1,15 @@
-import getNetworks from './getNetworks'
+import getNetworks, { INetwork } from './getNetworks'
 import getAddressToTrack from './getAddressToTrack'
-import getBalancesOfAddresses from './getBalancesOfAddresses'
+import getBalancesOfAddresses, { IFinalResult } from './getBalancesOfAddresses'
 
-const shared: any = {
+interface IShared {
+    getNetworks: () => INetwork[]
+    getAddressToTrack: () => string[]
+    getBalancesOfAddresses: (networks: INetwork[], addresses: string[]) => Promise<IFinalResult[]>
+}
+
+const shared: IShared = {
+    // Functions
     getNetworks,
     getAddressToTrack,
     getBalancesOfAddresses

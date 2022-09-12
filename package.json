@@ -21,7 +21,7 @@
   "scripts": {
     "prettier-scripts": "prettier --write scripts/",
     "track": "npx hardhat run scripts/trackWallets.js",
-    "trackAndSendReport": "npx hardhat run scripts/trackWalletsAndSendEmail.js"
+    "generateReport": "npx hardhat run scripts/trackWalletsAndGenerateReport.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",

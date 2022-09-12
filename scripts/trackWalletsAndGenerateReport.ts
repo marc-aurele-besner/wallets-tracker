@@ -1,6 +1,7 @@
 import fs from 'fs'
 
 import helper from './shared'
+import { IFinalResult } from './shared/getBalancesOfAddresses'
 
 async function main() {
   const networks = helper.getNetworks()
@@ -38,11 +39,12 @@ async function main() {
     const { SEND_EMAIL } = process.env
     // Balances list
     for (const address of addresses) {
-      const balancesList = finalResults[address].map((result: any) => {
+      const balancesList = finalResults[address].map((result: IFinalResult) => {
         return {
           chainId: result.chainId,
           network: result.network,
           balance: result.balance,
+          nativeCurrency: result.nativeCurrency
         }
       })
       if (SEND_EMAIL === 'true') {
@@ -60,7 +62,7 @@ async function main() {
   <tr>
     <td>${balance.network}</td>
     <td>${balance.chainId}</td>
-    <td>${balance.balance}</td>
+    <td>${balance.balance} ${balance.nativeCurrency}</td>
   </tr>`;
         }
         exportResults += `
@@ -80,6 +82,7 @@ async function main() {
   <tr>
     <th>Network</th>
     <th>ChainId</th>
+    <th>Native Currency</th>
     <th>RPC URL</th>
   </tr>`;
     for (const network of networks) {
@@ -87,6 +90,7 @@ async function main() {
   <tr>
     <td>${network.name}</td>
     <td>${network.chainId}</td>
+    <td>${network.nativeCurrency}</td>
     <td>${network.url}</td>
   </tr>`;
     }

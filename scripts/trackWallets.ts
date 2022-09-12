@@ -1,4 +1,5 @@
 import helper from './shared'
+import { IFinalResult } from './shared/getBalancesOfAddresses'
 
 async function main() {
   const networks = helper.getNetworks()
@@ -12,11 +13,12 @@ async function main() {
     console.log("Querying balance for ", addresses.length, " addresses")
 
     for (const address of addresses) {
-      const balancesList = finalResults[address].map((result: any) => {
+      const balancesList = finalResults[address].map((result: IFinalResult) => {
         return {
           chainId: result.chainId,
           network: result.network,
           balance: result.balance,
+          nativeCurrency: result.nativeCurrency
         };
       });
       // Console log result

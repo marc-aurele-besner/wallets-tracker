@@ -4,10 +4,19 @@ interface INetworks {
   name: string
   url: string
   chainId: number
+  nativeCurrency: string
+}
+
+export interface IFinalResult {
+  address: string
+  chainId: number
+  network: number
+  balance: string
+  nativeCurrency: string
 }
 
 const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]) => {
-  let finalResults: any = []
+  let finalResults: IFinalResult[] = []
   // Loop all networks
   for (const network of networks) {
     try {
@@ -35,6 +44,7 @@ const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]
             chainId: network.chainId,
             network: network.name,
             balance: ethers.utils.formatEther(balance),
+            nativeCurrency: network.nativeCurrency
           })
       }
     } catch (error) {

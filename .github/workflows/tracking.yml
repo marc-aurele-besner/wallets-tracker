@@ -31,7 +31,7 @@ env:
   RPC_OPTIMISM_TESTNET: ${{secrets.RPC_OPTIMISM_TESTNET}}
 
 jobs:
-  test:
+  report:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,7 +40,7 @@ jobs:
           node-version: 16
       - name: NPM Install
         run: npm install
-      - name: Run Track and Generate Report
+      - name: Generate Report
         run: npm run trackAndSendReport
       - name: Send Report
         uses: dawidd6/action-send-mail@v3
@@ -72,7 +72,7 @@ jobs:
           # Optional plain body:
           body: Build job of ${{github.repository}} completed successfully!
           # Optional HTML body read from file:
-          html_body: file://exports/export.html
+          html_body: exports/export.html
           # Optional carbon copy recipients:
           # cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients:

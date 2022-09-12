@@ -38,9 +38,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: NPM Clean Install
-        run: npm ci
-      - name: Run test
+      - name: NPM Install
+        run: npm install
+      - name: Run Track and Generate Report
         run: npm run trackAndSendReport
       - name: Send Report
         uses: dawidd6/action-send-mail@v3

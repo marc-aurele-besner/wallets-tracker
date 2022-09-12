@@ -95,6 +95,9 @@ async function main() {
   if (SEND_EMAIL === 'true') {
     exportResults += `</BODY>
     </HTML>`;
+    // Create folder if not exists
+    if (!fs.existsSync('exports')) fs.mkdirSync('exports');
+    // Create file
     fs.writeFileSync('exports/export.html', exportResults);
   }
   console.log(`Scrip executed`);

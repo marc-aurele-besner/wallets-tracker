@@ -84,7 +84,7 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
             // Push result
             if (!tokensBalancesResults[address]) tokensBalancesResults[address] = []
             if (balance.gt(0)) {
-              const { value, symbol } = await getTokensValue(token, tokensStablecoinOfNetwork, pairFactoryOfNetwork, network.name)
+              const { value, symbol } = await getTokensValue(token, tokensStablecoinOfNetwork, pairFactoryOfNetwork, owner)
               tokensBalancesResults[address].push({
                 address,
                 chainId: network.chainId,

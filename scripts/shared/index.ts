@@ -1,18 +1,23 @@
 import getNetworks, { INetwork } from './getNetworks'
 import getAddressToTrack from './getAddressToTrack'
-import getBalancesOfAddresses, { IFinalResult } from './getBalancesOfAddresses'
+import getTokenToTrack, { ITokensToTrack } from './getTokenToTrack'
+import getBalancesOfAddresses, { IWalletBalancesResult } from './getBalancesOfAddresses'
+import getTokensBalancesOfAddresses, { ITokensBalancesResult } from './getTokensBalancesOfAddresses'
 
 interface IShared {
     getNetworks: () => INetwork[]
     getAddressToTrack: () => string[]
-    getBalancesOfAddresses: (networks: INetwork[], addresses: string[]) => Promise<IFinalResult[]>
+    getTokenToTrack: () => ITokensToTrack[]
+    getBalancesOfAddresses: (networks: INetwork[], addresses: string[]) => Promise<IWalletBalancesResult[]>
+    getTokensBalancesOfAddresses: (networks: INetwork[], address: string, allTokens: ITokensToTrack[]) => Promise<ITokensBalancesResult[]>
 }
 
 const shared: IShared = {
-    // Functions
     getNetworks,
     getAddressToTrack,
-    getBalancesOfAddresses
+    getTokenToTrack,
+    getBalancesOfAddresses,
+    getTokensBalancesOfAddresses
 }
 
 export default shared

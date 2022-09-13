@@ -28,6 +28,10 @@ const config: HardhatUserConfig = {
       {
         version: "0.8.16",
       },
+      {
+        version: "0.5.16",
+        settings: {},
+      }
     ],
   },
   networks: DUMMY_PRIVATE_KEY ? {

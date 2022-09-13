@@ -7,7 +7,7 @@ interface INetworks {
   nativeCurrency: string
 }
 
-export interface IFinalResult {
+export interface IWalletBalancesResult {
   address: string
   chainId: number
   network: number
@@ -16,7 +16,7 @@ export interface IFinalResult {
 }
 
 const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]) => {
-  let finalResults: IFinalResult[] = []
+  let finalResults: IWalletBalancesResult[] = []
   // Loop all networks
   for (const network of networks) {
     try {

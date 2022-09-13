@@ -78,8 +78,10 @@ async function main() {
   </tr>`;
         }
         exportResults += `
-</table>
+</table>`
 
+        if (tokensBalancesList.length > 0) {
+          exportResults += `
 ### Tokens balances of ${address}
 <table>
   <tr>
@@ -88,7 +90,6 @@ async function main() {
     <th>Token</th>
     <th>Balance</th>
   </tr>`;
-        if (tokensBalancesList.length > 0) {
           for (const balance of tokensBalancesList) {
             exportResults += `
   <tr>
@@ -98,10 +99,10 @@ async function main() {
     <td>${balance.balance} ${balance.tokenSymbol}</td>
   </tr>`;
           }
-        }
         exportResults += `
 </table>
 `;
+        }
       } else {
         // Console log result
         console.log("Balance of ", address)

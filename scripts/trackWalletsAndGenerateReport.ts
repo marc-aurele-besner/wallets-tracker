@@ -1,13 +1,15 @@
 import fs from 'fs'
 
 import helper from './shared'
-import { IFinalResult } from './shared/getBalancesOfAddresses'
+import { IWalletBalancesResult } from './shared/getBalancesOfAddresses'
+import { ITokensBalancesResult } from './shared/getTokensBalancesOfAddresses'
 
 async function main() {
   const networks = helper.getNetworks()
   const addresses = helper.getAddressToTrack()
+  const allTokens = helper.getTokenToTrack()
   if (networks && addresses) {
-    const finalResults = await helper.getBalancesOfAddresses(networks, addresses)
+    const walletBalancesResult = await helper.getBalancesOfAddresses(networks, addresses)
     let exportResults = `
 <style>
   h1, h2, h3 {
@@ -39,7 +41,7 @@ async function main() {
     const { SEND_EMAIL } = process.env
     // Balances list
     for (const address of addresses) {
-      const balancesList = finalResults[address].map((result: IFinalResult) => {
+      const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
         return {
           chainId: result.chainId,
           network: result.network,
@@ -47,6 +49,16 @@ async function main() {
           nativeCurrency: result.nativeCurrency
         }
       })
+      const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)
+      const tokensBalancesList = tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
+        return {
+          chainId: result.chainId,
+          network: result.network,
+          tokenName: result.tokenName,
+          balance: result.balance,
+          tokenSymbol: result.tokenSymbol
+        };
+      });
       if (SEND_EMAIL === 'true') {
         exportResults += `
 
@@ -66,7 +78,28 @@ async function main() {
   </tr>`;
         }
         exportResults += `
-</table>`;
+</table>
+
+### Tokens balances of ${address}
+<table>
+  <tr>
+    <th>Network</th>
+    <th>ChainId</th>
+    <th>Token</th>
+    <th>Balance</th>
+  </tr>`;
+        for (const balance of tokensBalancesList) {
+          exportResults += `
+  <tr>
+    <td>${balance.network}</td>
+    <td>${balance.chainId}</td>
+    <td>${balance.tokenName}</td>
+    <td>${balance.balance} ${balance.tokenSymbol}</td>
+  </tr>`;
+        }
+        exportResults += `
+</table>
+`;
       } else {
         // Console log result
         console.log("Balance of ", address)

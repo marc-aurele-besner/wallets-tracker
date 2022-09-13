@@ -29,12 +29,7 @@ const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]
           // Get balance
           balance = await provider.getBalance(address)
         } catch (error) {
-          console.log(
-            "Error while getting balance for address ",
-            address,
-            " on network ",
-            network.name
-          )
+          console.log('Error while getting balance for address ', address, ' on network ', network.name)
         }
         if (!finalResults[address]) finalResults[address] = []
         // Push result
@@ -48,7 +43,7 @@ const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]
           })
       }
     } catch (error) {
-      console.log("Error while connecting to network ", network.name)
+      console.log('Error while connecting to network ', network.name)
     }
   }
   return finalResults

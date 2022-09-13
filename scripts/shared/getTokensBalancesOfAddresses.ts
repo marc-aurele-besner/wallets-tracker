@@ -16,6 +16,7 @@ export interface ITokensBalancesResult {
   balance: string
   tokenName: string
   tokenSymbol: string
+  tokenDecimals: number
 }
 
 const { DUMMY_PRIVATE_KEY } = process.env
@@ -43,6 +44,7 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
             let balance = ethers.BigNumber.from(0)
             let tokenName = ''
             let tokenSymbol = ''
+            let tokenDecimals = 0
             try {
               // Get ERC20 Contract
               const ERC20Contract = await new ethers.Contract(token, ERC20Factory.interface, owner);;
@@ -52,6 +54,8 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
               tokenName = await ERC20Contract.name()
               // Get token symbol
               tokenSymbol = await ERC20Contract.symbol()
+              // Get token decimals
+              tokenDecimals = await ERC20Contract.decimals()
             } catch (error) {
               console.log(
                 "Error while getting balance for token ",
@@ -69,7 +73,7 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
                 address,
                 chainId: network.chainId,
                 network: network.name,
-                balance: balance.toString(),
+                balance: ethers.utils.formatUnits(balance, tokenDecimals),
                 tokenName,
                 tokenSymbol
               })

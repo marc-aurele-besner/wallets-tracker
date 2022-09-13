@@ -1,6 +1,8 @@
 import { ethers } from 'hardhat'
 
+import { tokensStablecoin, pairFactory } from './constants'
 import { ITokensToTrack } from './getTokenToTrack'
+import getTokensValue from './getTokensValue'
 
 interface INetworks {
   name: string
@@ -16,7 +18,8 @@ export interface ITokensBalancesResult {
   balance: string
   tokenName: string
   tokenSymbol: string
-  tokenDecimals: number
+  fiatValue: string
+  fiatSymbol: string
 }
 
 const { DUMMY_PRIVATE_KEY } = process.env
@@ -31,6 +34,22 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
         .map((token) => {
           return token.tokens
         })[0]
+      const tokensStablecoinOfNetwork = tokensStablecoin
+        .filter((token) => token.network === network.name)
+        .map((token) => {
+          return {
+            address: token.address,
+            symbol: token.symbol
+          }
+        })
+      const pairFactoryOfNetwork = pairFactory
+        .filter((pair) => pair.network === network.name)
+        .map((pair) => {
+          return {
+            address: pair.address,
+            contractName: pair.contractName
+          }
+        })
       if (tokensOfNetwork) {
         try {
           // Get provider
@@ -45,6 +64,9 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
             let tokenName = ''
             let tokenSymbol = ''
             let tokenDecimals = 0
+            let fiatValue = ''
+            let fiatSymbol = ''
+            let fiatDecimals = 0
             try {
               // Get ERC20 Contract
               const ERC20Contract = await new ethers.Contract(token, ERC20Factory.interface, owner)
@@ -61,15 +83,19 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
             }
             // Push result
             if (!tokensBalancesResults[address]) tokensBalancesResults[address] = []
-            if (balance.gt(0))
+            if (balance.gt(0)) {
+              const { value, symbol } = await getTokensValue(token, tokensStablecoinOfNetwork, pairFactoryOfNetwork, network.name)
               tokensBalancesResults[address].push({
                 address,
                 chainId: network.chainId,
                 network: network.name,
                 balance: ethers.utils.formatUnits(balance, tokenDecimals),
                 tokenName,
-                tokenSymbol
+                tokenSymbol,
+                fiatValue: value,
+                fiatSymbol: symbol
               })
+            }
           }
         } catch (error) {
           console.log('Error while connecting to network ', network.name)

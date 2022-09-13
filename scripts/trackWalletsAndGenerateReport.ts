@@ -47,7 +47,8 @@ async function main() {
           network: result.network,
           balance: result.balance,
           nativeCurrency: result.nativeCurrency,
-          usdValue: 'TBD $'
+          fiatValue: 'TBD',
+          fiatSymbol: '$'
         }
       })
       const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)
@@ -58,7 +59,8 @@ async function main() {
           tokenName: result.tokenName,
           balance: result.balance,
           tokenSymbol: result.tokenSymbol,
-          usdValue: 'TBD $'
+          fiatValue: 'TBD',
+          fiatSymbol: '$'
         };
       }) : [];
       if (SEND_EMAIL === 'true') {
@@ -78,7 +80,7 @@ async function main() {
     <td>${balance.network}</td>
     <td>${balance.chainId}</td>
     <td>${balance.balance} ${balance.nativeCurrency}</td>
-    <td>${balance.usdValue}</td>
+    <td>${balance.fiatValue} ${balance.fiatSymbol}</td>
   </tr>`;
         }
         exportResults += `
@@ -102,7 +104,7 @@ async function main() {
     <td>${balance.chainId}</td>
     <td>${balance.tokenName}</td>
     <td>${balance.balance} ${balance.tokenSymbol}</td>
-    <td>${balance.usdValue}</td>
+    <td>${balance.fiatValue} ${balance.fiatSymbol}</td>
   </tr>`;
           }
         exportResults += `

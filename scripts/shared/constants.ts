@@ -3,6 +3,18 @@ export interface INativeCurrency {
   symbol: string
 }
 
+export interface ITokenStablecoin {
+  network: string
+  address: string
+  symbol: string
+}
+
+export interface IPairFactory {
+  network: string
+  address: string
+  contractName: string
+}
+
 const nativeCurrency: INativeCurrency[] = [
   // Public Mainnet
   {
@@ -53,6 +65,44 @@ const nativeCurrency: INativeCurrency[] = [
   {
     network: 'optimismTest',
     symbol: 'ETH'
+  }
+]
+
+export const tokensStablecoin: ITokenStablecoin[] = [
+  // Public Mainnet
+  {
+    network: 'ethereum',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'polygon',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'bsc',
+    address: '',
+    symbol: 'USDC'
+  }
+]
+
+export const pairFactory: IPairFactory[] = [
+  // Public Mainnet
+  {
+    network: 'ethereum',
+    address: '',
+    contractName: 'IPancakeFactory'
+  },
+  {
+    network: 'polygon',
+    address: '',
+    contractName: 'IPancakeFactory'
+  },
+  {
+    network: 'bsc',
+    address: '',
+    contractName: 'IPancakeFactory'
   }
 ]
 

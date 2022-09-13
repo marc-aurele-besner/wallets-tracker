@@ -13,6 +13,8 @@ export interface IWalletBalancesResult {
   network: number
   balance: string
   nativeCurrency: string
+  fiatValue: string
+  fiatSymbol: string
 }
 
 const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]) => {
@@ -39,7 +41,9 @@ const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]
             chainId: network.chainId,
             network: network.name,
             balance: ethers.utils.formatEther(balance),
-            nativeCurrency: network.nativeCurrency
+            nativeCurrency: network.nativeCurrency,
+            fiatValue: '',
+            fiatSymbol: ''
           })
       }
     } catch (error) {

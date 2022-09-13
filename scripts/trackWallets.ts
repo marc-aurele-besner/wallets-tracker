@@ -21,7 +21,8 @@ async function main() {
           network: result.network,
           balance: result.balance,
           nativeCurrency: result.nativeCurrency,
-          usdValue: 'TBD $ USD'
+          fiatValue: 'TBD',
+          fiatSymbol: '$'
         }
       })
       // Console log result
@@ -36,7 +37,8 @@ async function main() {
           tokenName: result.tokenName,
           balance: result.balance,
           tokenSymbol: result.tokenSymbol,
-          usdValue: 'TBD $ USD'
+          fiatValue: 'TBD',
+          fiatSymbol: '$'
         }
       })
       if (tokensBalancesList.length > 0) console.table(tokensBalancesList)

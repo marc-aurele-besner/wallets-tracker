@@ -50,7 +50,7 @@ async function main() {
         }
       })
       const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)
-      const tokensBalancesList = tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
+      const tokensBalancesList = tokensBalancesResult[address] ? tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
         return {
           chainId: result.chainId,
           network: result.network,
@@ -58,7 +58,7 @@ async function main() {
           balance: result.balance,
           tokenSymbol: result.tokenSymbol
         };
-      });
+      }) : [];
       if (SEND_EMAIL === 'true') {
         exportResults += `
 
@@ -88,14 +88,16 @@ async function main() {
     <th>Token</th>
     <th>Balance</th>
   </tr>`;
-        for (const balance of tokensBalancesList) {
-          exportResults += `
+        if (tokensBalancesList.length > 0) {
+          for (const balance of tokensBalancesList) {
+            exportResults += `
   <tr>
     <td>${balance.network}</td>
     <td>${balance.chainId}</td>
     <td>${balance.tokenName}</td>
     <td>${balance.balance} ${balance.tokenSymbol}</td>
   </tr>`;
+          }
         }
         exportResults += `
 </table>

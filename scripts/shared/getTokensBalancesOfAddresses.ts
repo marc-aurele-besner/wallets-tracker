@@ -47,7 +47,8 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
         .map((pair) => {
           return {
             address: pair.address,
-            contractName: pair.contractName
+            contractName: pair.contractName,
+            contractType: pair.contractType
           }
         })
       if (tokensOfNetwork) {

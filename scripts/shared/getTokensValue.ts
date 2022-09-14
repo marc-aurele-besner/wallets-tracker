@@ -35,7 +35,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
     while (!pairFactoryFound && pairFactory.length > pairId) {
       try {
         PairFactory = await ethers.getContractFactory(pairFactory[pairId].contractName)
-      } catch (error) { }
+      } catch (error) {}
       if (PairFactory) pairFactoryFound = true
       else pairId++
     }
@@ -52,12 +52,12 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
         tokenBAddress = tokenB[tokenBid].address
         try {
           // if (pairFactory[pairId].contractType === 'UniswapV2')
-            pair = await PairFactoryContract.getPair(tokenA, tokenBAddress)
-        } catch (error) { }
+          pair = await PairFactoryContract.getPair(tokenA, tokenBAddress)
+        } catch (error) {}
         if (pair && pair !== '0x0000000000000000000000000000000000000000') pairFound = true
         else tokenBid++
       }
-      if (pair && tokenBAddress && pair !== '0x0000000000000000000000000000000000000000' && tokenBAddress !== "") {
+      if (pair && tokenBAddress && pair !== '0x0000000000000000000000000000000000000000' && tokenBAddress !== '') {
         // Get ERC20 Factory
         const ERC20Factory = await ethers.getContractFactory('MockERC20Upgradeable')
         // Get ERC20 Contract

@@ -1,4 +1,3 @@
-
 import { Wallet } from '@ethersproject/wallet'
 
 import getNetworks, { INetwork } from './getNetworks'

@@ -8,6 +8,7 @@ async function main() {
   const networks = helper.getNetworks()
   const addresses = helper.getAddressToTrack()
   const allTokens = helper.getTokenToTrack()
+  const valueOfCurrencies = await helper.getCurrenciesValue(networks)
   if (networks && addresses) {
     const walletBalancesResult = await helper.getBalancesOfAddresses(networks, addresses)
     let exportResults = `
@@ -42,13 +43,14 @@ async function main() {
     // Balances list
     for (const address of addresses) {
       const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
+        const valueOfCurrency = valueOfCurrencies.find((currency) => currency.chainId === result.chainId)
         return {
           chainId: result.chainId,
           network: result.network,
           balance: result.balance,
           nativeCurrency: result.nativeCurrency,
-          fiatValue: 'TBD',
-          fiatSymbol: '$'
+          fiatValue: valueOfCurrency?.value || 'TBD',
+          fiatSymbol: valueOfCurrency?.symbol || '$'
         }
       })
       const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)

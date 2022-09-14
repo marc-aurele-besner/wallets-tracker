@@ -1,6 +1,5 @@
 import { ethers } from 'hardhat'
 import { Wallet } from '@ethersproject/wallet'
-import { truncate } from 'fs'
 
 export interface ITokenValue {
   value: string
@@ -85,10 +84,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
           }
           return tokenValue
         } else tokenValue.error = 'Balance token B is 0'
-      } else {
-        tokenValue.error = 'No pair found for ' + tokenA + ' and ' + tokenBAddress
-        console.log('No pair found for ', tokenA, ' and ', tokenBAddress)
-      }
+      } else tokenValue.error = 'No pair found for ' + tokenA + ' and ' + tokenBAddress
     } else tokenValue.error = 'No pair factory found'
   }
   return tokenValue

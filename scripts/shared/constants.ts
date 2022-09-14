@@ -77,6 +77,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
   },
   {
     network: 'ethereum',
+    address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+    symbol: 'USDT'
+  },
+  {
+    network: 'ethereum',
     address: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     symbol: 'WETH'
   },
@@ -99,6 +104,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
     network: 'bsc',
     address: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
     symbol: 'USDC'
+  },
+  {
+    network: 'bsc',
+    address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+    symbol: 'BUSD'
   },
   {
     network: 'bsc',
@@ -185,20 +195,22 @@ export const tokensStablecoin: ITokenStablecoin[] = [
 
 export const pairFactory: IPairFactory[] = [
   // Public Mainnet
-  { // Uniswap
+  {
+    // Uniswap
     network: 'ethereum',
     address: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
     contractName: 'UniswapV2Factory'
   },
-  { // SushiSwap
+  {
+    // SushiSwap
     network: 'ethereum',
     address: '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac',
     contractName: 'UniswapV2Factory'
   },
   {
     network: 'polygon',
-    address: '',
-    contractName: 'IPancakeFactory'
+    address: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
+    contractName: 'UniswapV2Factory'
   },
   {
     network: 'bsc',

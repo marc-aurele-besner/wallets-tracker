@@ -1,5 +1,5 @@
 import { ethers } from 'hardhat'
-import { Wallet } from "@ethersproject/wallet";
+import { Wallet } from '@ethersproject/wallet'
 
 export interface ITokenValue {
   value: string
@@ -38,11 +38,9 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
             PairFactory = await ethers.getContractFactory(pairFactory[1].contractName)
             pairId = 1
           } catch (error) {
-            console.log('No contract found')
+            tokenValue.error = 'No contract found'
           }
-        } else {
-          console.log('No contract found')
-        }
+        } else tokenValue.error = 'No contract found'
       }
       if (PairFactory) {
         const PairFactoryContract = await new ethers.Contract(pairFactory[pairId].address, PairFactory.interface, owner)
@@ -65,7 +63,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
             console.log('Cannot get pair, try ', tokenA, tokenB[0].address, ' with factory ', pairFactory[pairId].address)
           }
         }
-        if (pair) {
+        if (pair && pair !== '0x0000000000000000000000000000000000000000') {
           // Get ERC20 Factory
           const ERC20Factory = await ethers.getContractFactory('MockERC20Upgradeable')
           // Get ERC20 Contract
@@ -74,27 +72,24 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
           // Get balance token 0 & 1
           const balanceTokenA = await TokenAContract.balanceOf(pair)
           const symbolTokenA = await TokenAContract.symbol()
-          const decimalsTokenA = await TokenAContract.decimals()
-          const floatBalanceTokenA = ethers.BigNumber.from(ethers.utils.formatUnits(balanceTokenA, decimalsTokenA))
+          const decimalsTokenA = ethers.BigNumber.from(await TokenAContract.decimals())
 
           const balanceTokenB = await TokenBContract.balanceOf(pair)
           const symbolTokenB = await TokenBContract.symbol()
-          const decimalsTokenB = await TokenAContract.decimals()
-          const floatBalanceTokenB = ethers.BigNumber.from(ethers.utils.formatUnits(balanceTokenB, decimalsTokenB))
-          
-          console.log('balanceTokenA', balanceTokenA.toString(), 'balanceTokenB', balanceTokenB.toString())
-          console.log('try', ethers.BigNumber.from(balanceTokenA).div(balanceTokenB))
-          // if (balanceTokenB) {
-            // const valueTokenAoverB = ethers.BigNumber.from(balanceTokenA).mul(ethers.BigNumber.from(10).pow(decimalsTokenB)).div(balanceTokenB).div(ethers.BigNumber.from(10).pow(decimalsTokenB))
-            // const valueFormatter = ethers.BigNumber.from(floatBalanceTokenA).div(floatBalanceTokenB)
-            // console.log('valueFormatted', valueTokenAoverB, decimalsTokenA, symbolTokenB)
-            // console.log('valueFormatter', valueFormatter)
-            // tokenValue = {
-            //   value: ethers.utils.formatUnits(valueTokenAoverB, decimalsTokenA),
-            //   symbol: symbolTokenB,
-            //   error: ''
-            // }
-          // } else tokenValue.error = 'Balance token B is 0'
+          const decimalsTokenB = ethers.BigNumber.from(await TokenBContract.decimals())
+
+          if (balanceTokenB) {
+            const bitTen = ethers.BigNumber.from(10)
+            const value = ethers.BigNumber.from(balanceTokenB)
+              .mul(bitTen.pow(decimalsTokenA))
+              .div(balanceTokenA.div(bitTen.pow(decimalsTokenA.sub(decimalsTokenB))))
+            tokenValue = {
+              value: ethers.utils.formatUnits(value, decimalsTokenA),
+              symbol: symbolTokenB,
+              error: ''
+            }
+            return tokenValue
+          } else tokenValue.error = 'Balance token B is 0'
         } else tokenValue.error = 'No pair found for ' + tokenA + ' and ' + tokenB[tokenBid].address
       } else tokenValue.error = 'No pair factory found'
     } catch (error) {

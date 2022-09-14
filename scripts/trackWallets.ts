@@ -37,8 +37,8 @@ async function main() {
           tokenName: result.tokenName,
           balance: result.balance,
           tokenSymbol: result.tokenSymbol,
-          fiatValue: 'TBD',
-          fiatSymbol: '$'
+          fiatValue: result.fiatValue,
+          fiatSymbol: result.fiatSymbol
         }
       })
       if (tokensBalancesList.length > 0) console.table(tokensBalancesList)

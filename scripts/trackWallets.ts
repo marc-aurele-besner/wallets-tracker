@@ -1,3 +1,5 @@
+import { ethers } from 'hardhat'
+
 import helper from './shared'
 import { IWalletBalancesResult } from './shared/getBalancesOfAddresses'
 import { ITokensBalancesResult } from './shared/getTokensBalancesOfAddresses'
@@ -21,10 +23,23 @@ async function main() {
         return {
           chainId: result.chainId,
           network: result.network,
-          balance: result.balance,
+          balance: ethers.utils.formatEther(result.balance),
           nativeCurrency: result.nativeCurrency,
-          fiatValue: valueOfCurrency?.value || 'TBD',
-          fiatSymbol: valueOfCurrency?.symbol || '$'
+          fiatValue: valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
+            ?
+              ethers.utils.formatUnits(valueOfCurrency.value, 18 + 6)
+            :
+              'TBD',
+          fiatSymbol: valueOfCurrency?.symbol || '$',
+          fiatBalanceValue: 
+            result.balance && valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
+            ?
+              ethers.utils.formatUnits(
+                ethers.BigNumber.from(result.balance).mul(valueOfCurrency.value),
+                valueOfCurrency.decimals + 18 + 18
+              ).split('.')[0]
+            :
+              'TBD'
         }
       })
       // Console log result
@@ -37,10 +52,20 @@ async function main() {
           chainId: result.chainId,
           network: result.network,
           tokenName: result.tokenName,
-          balance: result.balance,
+          balance: ethers.utils.formatUnits(result.balance, result.tokenDecimals),
           tokenSymbol: result.tokenSymbol,
-          fiatValue: result.fiatValue,
+          fiatValue: ethers.utils.formatUnits(result.fiatValue, result.tokenDecimals),
           fiatSymbol: result.fiatSymbol
+          // ,
+          // fiatBalanceValue: 
+          //   result.balance && result.fiatValue && result.fiatValue !== 'TBD'
+          //   ?
+          //     ethers.utils.formatUnits(
+          //       ethers.BigNumber.from(result.balance).mul(result.fiatValue),
+          //       result.tokenDecimals + 18 + 6
+          //     )
+          //   :
+          //     'TBD'
         }
       })
       if (tokensBalancesList.length > 0) console.table(tokensBalancesList)

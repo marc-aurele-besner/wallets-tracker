@@ -18,6 +18,7 @@ export interface ITokensBalancesResult {
   balance: string
   tokenName: string
   tokenSymbol: string
+  tokenDecimals: number
   fiatValue: string
   fiatSymbol: string
 }
@@ -90,9 +91,10 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
                 address,
                 chainId: network.chainId,
                 network: network.name,
-                balance: ethers.utils.formatUnits(balance, tokenDecimals),
+                balance,
                 tokenName,
                 tokenSymbol,
+                tokenDecimals,
                 fiatValue: value,
                 fiatSymbol: symbol
               })

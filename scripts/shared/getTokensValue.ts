@@ -4,6 +4,7 @@ import { Wallet } from '@ethersproject/wallet'
 export interface ITokenValue {
   value: string
   symbol: string
+  decimals: number
   error: string
 }
 
@@ -24,6 +25,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
   let tokenValue: ITokenValue = {
     value: 'TBD',
     symbol: '$',
+    decimals: 0,
     error: ''
   }
   if (DUMMY_PRIVATE_KEY) {
@@ -76,10 +78,11 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
           const bitTen = ethers.BigNumber.from(10)
           const value = ethers.BigNumber.from(balanceTokenB)
             .mul(bitTen.pow(decimalsTokenA))
-            .div(balanceTokenA.div(bitTen.pow(decimalsTokenA.sub(decimalsTokenB))))
+            .div(balanceTokenA.div(bitTen.pow(decimalsTokenA)))
           tokenValue = {
-            value: ethers.utils.formatUnits(value, decimalsTokenA),
+            value: value.toString(),
             symbol: symbolTokenB,
+            decimals: decimalsTokenB.toNumber(),
             error: ''
           }
           return tokenValue

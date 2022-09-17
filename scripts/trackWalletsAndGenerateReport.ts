@@ -70,7 +70,7 @@ async function main() {
       })
       const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)
       const tokensBalancesList = tokensBalancesResult[address] ? tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
-        const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA)
+        const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA == 0 ? 18 : result.decimalsTokenA)
         const fiatValueFormatted = helper.getValueFormatted(result.type, balanceFormatted, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB)
         const fiatBalanceValueFormatted = helper.getBalanceValueFormatted(result.type, result.balance, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB)
         if (fiatBalanceValueFormatted && fiatBalanceValueFormatted !== 'TBD') {

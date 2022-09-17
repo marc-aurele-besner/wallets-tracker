@@ -6,6 +6,7 @@ Track Wallets balance (for native currencies and ERC20 tokens) on multiple chain
 - Get value of each currencies and tokens base on DEX Liquidity Pools
 - Get value of your balance for each currency and tokens
 - Get total value of each wallets and total value of all wallets together
+- Can track value of native cryptocurrency, ERC20 tokens, LP tokens and AAVE Market tokens
 
 
 ## Clone or fork this repository

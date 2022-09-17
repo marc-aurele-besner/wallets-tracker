@@ -46,6 +46,10 @@ const nativeCurrency: INativeCurrency[] = [
     network: 'cronos',
     symbol: 'CRO'
   },
+  {
+    network: 'fantom',
+    symbol: 'CRO'
+  },
   // Testnet
   {
     network: 'ropstein',
@@ -150,6 +154,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
   },
   {
     network: 'cronos',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'fantom',
     address: '',
     symbol: 'USDC'
   },
@@ -278,6 +287,12 @@ export const pairFactory: IPairFactory[] = [
   },
   {
     network: 'cronos',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'fantom',
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'

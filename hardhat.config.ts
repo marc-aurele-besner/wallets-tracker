@@ -14,6 +14,7 @@ const {
   RPC_AVALANCHE,
   RPC_ARBITRUM,
   RPC_CHRONOS,
+  RPC_FANTOM,
   RPC_ROPSTEIN,
   RPC_RINKEBY,
   RPC_GOERLI,
@@ -77,6 +78,11 @@ const config: HardhatUserConfig = {
         cronos: {
           chainId: 25,
           url: `${RPC_CHRONOS}`,
+          accounts: [`${DUMMY_PRIVATE_KEY}`]
+        },
+        fantom: {
+          chainId: 250,
+          url: `${RPC_FANTOM}`,
           accounts: [`${DUMMY_PRIVATE_KEY}`]
         },
         // Testnet

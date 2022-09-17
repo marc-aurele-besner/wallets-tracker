@@ -102,6 +102,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'RBTC',
     type: "mainnet"
   },
+  {
+    network: 'metis',
+    symbol: 'METIS',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

@@ -9,7 +9,8 @@ export interface ICurrencyValue {
   chainId: number
   value: string
   symbol: string
-  decimals: number
+  decimalsTokenA: number
+  decimalsTokenB: number
   error: string
 }
 
@@ -23,7 +24,8 @@ const getCurrenciesValue = async (networks: INetwork[]) => {
         chainId: network.chainId,
         value: 'TBD',
         symbol: '$',
-        decimals: 0,
+        decimalsTokenA: 0,
+        decimalsTokenB: 0,
         error: ''
       }
       const currenciesOfNetwork = nativeCurrency
@@ -61,10 +63,16 @@ const getCurrenciesValue = async (networks: INetwork[]) => {
             // Get wallet
             const owner = new ethers.Wallet(DUMMY_PRIVATE_KEY, provider)
             // Get wrapped native currency value
-            const { value, symbol, decimals } = await getTokensValue(wrappedCurrenciesOfNetwork, tokensOfNetwork, pairFactoryOfNetwork, owner)
+            const { value, symbol, decimalsTokenA, decimalsTokenB } = await getTokensValue(
+              wrappedCurrenciesOfNetwork,
+              tokensOfNetwork,
+              pairFactoryOfNetwork,
+              owner
+            )
             tokenValue.value = value
             tokenValue.symbol = symbol
-            tokenValue.decimals = decimals
+            tokenValue.decimalsTokenA = decimalsTokenA
+            tokenValue.decimalsTokenB = decimalsTokenB
           }
         } else console.log('No tokens of network', network.name)
       }

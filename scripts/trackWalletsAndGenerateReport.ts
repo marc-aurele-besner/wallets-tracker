@@ -1,3 +1,4 @@
+import { ethers } from 'hardhat'
 import fs from 'fs'
 
 import helper from './shared'
@@ -49,20 +50,27 @@ async function main() {
           network: result.network,
           balance: result.balance,
           nativeCurrency: result.nativeCurrency,
-          fiatValue: valueOfCurrency?.value || 'TBD',
-          fiatSymbol: valueOfCurrency?.symbol || '$'
+          fiatValue: valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
+            ?
+              helper.getValueFormatted('', '1', valueOfCurrency.value, valueOfCurrency?.decimalsTokenA || 0, valueOfCurrency?.decimalsTokenB || 0)
+            :
+              'TBD',
+          fiatSymbol: valueOfCurrency?.symbol || '$',
+          fiatBalanceValue: helper.getBalanceValueFormatted('', result.balance, valueOfCurrency?.value || '', valueOfCurrency?.decimalsTokenA || 0, valueOfCurrency?.decimalsTokenB || 0)
         }
       })
       const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)
       const tokensBalancesList = tokensBalancesResult[address] ? tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
+        const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA)
         return {
           chainId: result.chainId,
           network: result.network,
           tokenName: result.tokenName,
           balance: result.balance,
           tokenSymbol: result.tokenSymbol,
-          fiatValue: result.fiatValue,
-          fiatSymbol: result.fiatSymbol
+          fiatValue: helper.getValueFormatted(result.type, balanceFormatted, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB),
+          fiatSymbol: result.fiatSymbol,
+          fiatBalanceValue: helper.getBalanceValueFormatted(result.type, result.balance, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB)
         };
       }) : [];
       if (SEND_EMAIL === 'true') {
@@ -74,7 +82,8 @@ async function main() {
     <th>Network</th>
     <th>ChainId</th>
     <th>Balance</th>
-    <th>USD Value</th>
+    <th>Currency Value</th>
+    <th>Balance Value</th>
   </tr>`;
         for (const balance of balancesList) {
           exportResults += `
@@ -83,6 +92,7 @@ async function main() {
     <td>${balance.chainId}</td>
     <td>${balance.balance} ${balance.nativeCurrency}</td>
     <td>${balance.fiatValue} ${balance.fiatSymbol}</td>
+    <td>${balance.fiatBalanceValue} ${balance.fiatSymbol}</td>
   </tr>`;
         }
         exportResults += `
@@ -97,7 +107,8 @@ async function main() {
     <th>ChainId</th>
     <th>Token</th>
     <th>Balance</th>
-    <th>USD Value</th>
+    <th>Token Value</th>
+    <th>Balance Value</th>
   </tr>`;
           for (const balance of tokensBalancesList) {
             exportResults += `
@@ -107,6 +118,7 @@ async function main() {
     <td>${balance.tokenName}</td>
     <td>${balance.balance} ${balance.tokenSymbol}</td>
     <td>${balance.fiatValue} ${balance.fiatSymbol}</td>
+    <td>${balance.fiatBalanceValue} ${balance.fiatSymbol}</td>
   </tr>`;
           }
         exportResults += `

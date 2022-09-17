@@ -25,21 +25,18 @@ async function main() {
           network: result.network,
           balance: ethers.utils.formatEther(result.balance),
           nativeCurrency: result.nativeCurrency,
-          fiatValue: valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
-            ?
-              ethers.utils.formatUnits(valueOfCurrency.value, 18 + 6)
-            :
-              'TBD',
+          fiatValue:
+            valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
+              ? helper.getValueFormatted('', '1', valueOfCurrency.value, valueOfCurrency?.decimalsTokenA || 0, valueOfCurrency?.decimalsTokenB || 0)
+              : 'TBD',
           fiatSymbol: valueOfCurrency?.symbol || '$',
-          fiatBalanceValue: 
-            result.balance && valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
-            ?
-              ethers.utils.formatUnits(
-                ethers.BigNumber.from(result.balance).mul(valueOfCurrency.value),
-                valueOfCurrency.decimals + 18 + 18
-              ).split('.')[0]
-            :
-              'TBD'
+          fiatBalanceValue: helper.getBalanceValueFormatted(
+            '',
+            result.balance,
+            valueOfCurrency?.value || '',
+            valueOfCurrency?.decimalsTokenA || 0,
+            valueOfCurrency?.decimalsTokenB || 0
+          )
         }
       })
       // Console log result
@@ -48,24 +45,16 @@ async function main() {
       else console.log('No tokens balances found')
       const tokensBalancesResult = await helper.getTokensBalancesOfAddresses(networks, address, allTokens)
       const tokensBalancesList = tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
+        const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA)
         return {
           chainId: result.chainId,
           network: result.network,
           tokenName: result.tokenName,
-          balance: ethers.utils.formatUnits(result.balance, result.tokenDecimals),
+          balance: balanceFormatted,
           tokenSymbol: result.tokenSymbol,
-          fiatValue: ethers.utils.formatUnits(result.fiatValue, result.tokenDecimals),
-          fiatSymbol: result.fiatSymbol
-          // ,
-          // fiatBalanceValue: 
-          //   result.balance && result.fiatValue && result.fiatValue !== 'TBD'
-          //   ?
-          //     ethers.utils.formatUnits(
-          //       ethers.BigNumber.from(result.balance).mul(result.fiatValue),
-          //       result.tokenDecimals + 18 + 6
-          //     )
-          //   :
-          //     'TBD'
+          fiatValue: helper.getValueFormatted(result.type, balanceFormatted, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB),
+          fiatSymbol: result.fiatSymbol,
+          fiatBalanceValue: helper.getBalanceValueFormatted(result.type, result.balance, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB)
         }
       })
       if (tokensBalancesList.length > 0) console.table(tokensBalancesList)

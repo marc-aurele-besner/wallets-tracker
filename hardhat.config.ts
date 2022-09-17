@@ -13,6 +13,7 @@ const {
   RPC_OPTIMISM,
   RPC_AVALANCHE,
   RPC_ARBITRUM,
+  RPC_CHRONOS,
   RPC_ROPSTEIN,
   RPC_RINKEBY,
   RPC_GOERLI,
@@ -71,6 +72,11 @@ const config: HardhatUserConfig = {
         arbitrum: {
           chainId: 42161,
           url: `${RPC_ARBITRUM}`,
+          accounts: [`${DUMMY_PRIVATE_KEY}`]
+        },
+        cronos: {
+          chainId: 25,
+          url: `${RPC_CHRONOS}`,
           accounts: [`${DUMMY_PRIVATE_KEY}`]
         },
         // Testnet

@@ -42,6 +42,10 @@ const nativeCurrency: INativeCurrency[] = [
     network: 'arbitrum',
     symbol: 'ETH'
   },
+  {
+    network: 'cronos',
+    symbol: 'CRO'
+  },
   // Testnet
   {
     network: 'ropstein',
@@ -141,6 +145,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
   },
   {
     network: 'arbitrum',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'cronos',
     address: '',
     symbol: 'USDC'
   },
@@ -266,7 +275,13 @@ export const pairFactory: IPairFactory[] = [
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'
-  }
+  },
+  {
+    network: 'cronos',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
   // Testnet
   {
     // Uniswap

@@ -16,7 +16,7 @@ interface IShared {
   getTokenToTrack: () => ITokensToTrack[]
   getBalancesOfAddresses: (networks: INetwork[], addresses: string[]) => Promise<IWalletBalancesResult[]>
   getTokensBalancesOfAddresses: (networks: INetwork[], address: string, allTokens: ITokensToTrack[]) => Promise<ITokensBalancesResult[]>
-  getTokensValue: (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet) => Promise<ITokenValue>
+  getTokensValue: (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet, type?: string) => Promise<ITokenValue>
   getCurrenciesValue: (networks: INetwork[]) => Promise<ICurrencyValue[]>
   getValueFormatted: (tokenType: string, balance: string, fiatValue: string, decimalsTokenA: number, decimalsTokenB: number) => string
   getBalanceValueFormatted: (

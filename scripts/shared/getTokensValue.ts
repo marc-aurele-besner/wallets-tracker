@@ -23,7 +23,7 @@ export interface IPairFactoryOfNetwork {
 
 const { DUMMY_PRIVATE_KEY } = process.env
 
-const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet) => {
+const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet, type?: string) => {
   let tokenValue: ITokenValue = {
     value: 'TBD',
     symbol: '$',
@@ -72,7 +72,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
         // Get balance token 0 & 1
         const balanceTokenA = await TokenAContract.balanceOf(pair)
         const symbolTokenA = await TokenAContract.symbol()
-        if (tokenB.find((token) => token.symbol === symbolTokenA)) {
+        if (type !== undefined && tokenB.find((token) => token.symbol === symbolTokenA)) {
           tokenValue.type = 'stablecoin'
           tokenValue.symbol = symbolTokenA
         }

@@ -21,6 +21,7 @@ const {
   RPC_GNOSIS,
   RPC_AURORA,
   RPC_FUSION,
+  RPC_CELO,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -99,6 +100,11 @@ const networks = {
   fusion: {
     chainId: 32659,
     url: `${RPC_FUSION}`,
+    accounts
+  },
+  celo: {
+    chainId: 42220,
+    url: `${RPC_CELO}`,
     accounts
   },
   // Testnet

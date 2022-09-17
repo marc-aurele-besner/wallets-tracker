@@ -77,6 +77,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'FSN',
     type: "mainnet"
   },
+  {
+    network: 'celo',
+    symbol: 'CELO',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

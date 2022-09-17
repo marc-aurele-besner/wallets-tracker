@@ -2,7 +2,7 @@ name: Track Wallet Daily
 
 on:
   schedule:
-    # Runs "at minute 55 past every hour" (see https://crontab.guru)
+    # Runs "at 6h30 am every day" (see https://crontab.guru)
     - cron: '30 6 * * *'
   workflow_dispatch:
 

@@ -1,8 +1,8 @@
 import { ethers } from 'hardhat'
 import { Wallet } from '@ethersproject/wallet'
 
+import { nativeCurrency, tokensStablecoin, pairFactory } from './constants'
 import { INetwork } from './getNetworks'
-import nativeCurrency, { tokensStablecoin, pairFactory } from './constants'
 import getTokensValue from './getTokensValue'
 
 export interface ICurrencyValue {

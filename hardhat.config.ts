@@ -20,6 +20,7 @@ const {
   RPC_KAVA,
   RPC_GNOSIS,
   RPC_AURORA,
+  RPC_FUSION,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -93,6 +94,11 @@ const networks = {
   aurora: {
     chainId: 1313161554,
     url: `${RPC_AURORA}`,
+    accounts
+  },
+  fusion: {
+    chainId: 32659,
+    url: `${RPC_FUSION}`,
     accounts
   },
   // Testnet

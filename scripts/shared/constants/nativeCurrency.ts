@@ -72,6 +72,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'ETH',
     type: "mainnet"
   },
+  {
+    network: 'fusion',
+    symbol: 'FSN',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

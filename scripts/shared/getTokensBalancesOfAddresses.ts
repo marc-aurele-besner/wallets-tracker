@@ -2,7 +2,7 @@ import { ethers } from 'hardhat'
 
 import { tokensStablecoin, pairFactory, TNetworkType } from './constants'
 import { ITokensToTrack } from './getTokenToTrack'
-import getTokensValue from './getTokensValue'
+import getMultipleTypeTokensValue from './getMultipleTypeTokensValue'
 import { INetwork } from './getNetworks'
 
 export interface ITokensBalancesResult {
@@ -78,11 +78,12 @@ const getTokensBalancesOfAddresses = async (networks: INetwork[], address: strin
             // Push result
             if (!tokensBalancesResults[address]) tokensBalancesResults[address] = []
             if (balance.gt(0)) {
-              const { value, symbol, type, decimalsTokenA, decimalsTokenB } = await getTokensValue(
+              const { value, symbol, type, decimalsTokenA, decimalsTokenB } = await getMultipleTypeTokensValue(
                 token,
                 tokensStablecoinOfNetwork,
                 pairFactoryOfNetwork,
-                owner
+                owner,
+                network.name
               )
               await tokensBalancesResults[address].push({
                 address,

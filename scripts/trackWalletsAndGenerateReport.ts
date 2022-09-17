@@ -48,7 +48,7 @@ async function main() {
         return {
           chainId: result.chainId,
           network: result.network,
-          balance: result.balance,
+          balance: ethers.utils.formatEther(result.balance),
           nativeCurrency: result.nativeCurrency,
           fiatValue: valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
             ?
@@ -66,7 +66,7 @@ async function main() {
           chainId: result.chainId,
           network: result.network,
           tokenName: result.tokenName,
-          balance: result.balance,
+          balance: balanceFormatted,
           tokenSymbol: result.tokenSymbol,
           fiatValue: helper.getValueFormatted(result.type, balanceFormatted, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB),
           fiatSymbol: result.fiatSymbol,

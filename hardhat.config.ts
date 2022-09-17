@@ -28,6 +28,104 @@ const {
   RPC_OPTIMISM_TESTNET,
   RPC_OPTIMISM_GOERLI
 } = process.env
+if (!DUMMY_PRIVATE_KEY) throw new Error('DUMMY_PRIVATE_KEY is not defined')
+
+const accounts = [`${DUMMY_PRIVATE_KEY}`]
+const networks = {
+  // Mainnet
+  ethereum: {
+    chainId: 1,
+    url: `${RPC_ETHEREUM}`,
+    accounts
+  },
+  polygon: {
+    chainId: 137,
+    url: `${RPC_POLYGON}`,
+    accounts
+  },
+  bsc: {
+    chainId: 56,
+    url: `${RPC_BINANCE}`,
+    accounts
+  },
+  optimism: {
+    chainId: 10,
+    url: `${RPC_OPTIMISM}`,
+    accounts
+  },
+  avalanche: {
+    chainId: 43114,
+    url: `${RPC_AVALANCHE}`,
+    accounts
+  },
+  arbitrum: {
+    chainId: 42161,
+    url: `${RPC_ARBITRUM}`,
+    accounts
+  },
+  cronos: {
+    chainId: 25,
+    url: `${RPC_CHRONOS}`,
+    accounts
+  },
+  fantom: {
+    chainId: 250,
+    url: `${RPC_FANTOM}`,
+    accounts
+  },
+  klaytn: {
+    chainId: 8217,
+    url: `${RPC_KLAYTN}`,
+    accounts
+  },
+  kava: {
+    chainId: 2222,
+    url: `${RPC_KAVA}`,
+    accounts
+  },
+  // Testnet
+  hardhat: {},
+  ropstein: {
+    chainId: 3,
+    url: `${RPC_ROPSTEIN}`,
+    accounts
+  },
+  rinkeby: {
+    chainId: 4,
+    url: `${RPC_RINKEBY}`,
+    accounts
+  },
+  goerli: {
+    chainId: 5,
+    url: `${RPC_GOERLI}`,
+    accounts
+  },
+  kovan: {
+    chainId: 42,
+    url: `${RPC_KOVAN}`,
+    accounts
+  },
+  mumbai: {
+    chainId: 80001,
+    url: `${RPC_MUMBAI}`,
+    accounts
+  },
+  bscTest: {
+    chainId: 97,
+    url: `${RPC_BINANCE_TESTNET}`,
+    accounts
+  },
+  optimismKovan: {
+    chainId: 69,
+    url: `${RPC_OPTIMISM_TESTNET}`,
+    accounts
+  },
+  optimismGoerli: {
+    chainId: 420,
+    url: `${RPC_OPTIMISM_GOERLI}`,
+    accounts
+  }
+}
 
 /** @type import('hardhat/config').HardhatUserConfig */
 const config: HardhatUserConfig = {
@@ -46,103 +144,7 @@ const config: HardhatUserConfig = {
       }
     ]
   },
-  networks: DUMMY_PRIVATE_KEY
-    ? {
-        hardhat: {},
-        // Mainnet
-        ethereum: {
-          chainId: 1,
-          url: `${RPC_ETHEREUM}`,
-          accounts: [DUMMY_PRIVATE_KEY]
-        },
-        polygon: {
-          chainId: 137,
-          url: `${RPC_POLYGON}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        bsc: {
-          chainId: 56,
-          url: `${RPC_BINANCE}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        optimism: {
-          chainId: 10,
-          url: `${RPC_OPTIMISM}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        avalanche: {
-          chainId: 43114,
-          url: `${RPC_AVALANCHE}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        arbitrum: {
-          chainId: 42161,
-          url: `${RPC_ARBITRUM}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        cronos: {
-          chainId: 25,
-          url: `${RPC_CHRONOS}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        fantom: {
-          chainId: 250,
-          url: `${RPC_FANTOM}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        klaytn: {
-          chainId: 8217,
-          url: `${RPC_KLAYTN}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        kava: {
-          chainId: 2222,
-          url: `${RPC_KAVA}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        // Testnet
-        ropstein: {
-          chainId: 3,
-          url: RPC_ROPSTEIN,
-          accounts: [DUMMY_PRIVATE_KEY]
-        },
-        rinkeby: {
-          chainId: 4,
-          url: RPC_RINKEBY,
-          accounts: [DUMMY_PRIVATE_KEY]
-        },
-        goerli: {
-          chainId: 5,
-          url: RPC_GOERLI,
-          accounts: [DUMMY_PRIVATE_KEY]
-        },
-        kovan: {
-          chainId: 42,
-          url: RPC_KOVAN,
-          accounts: [DUMMY_PRIVATE_KEY]
-        },
-        mumbai: {
-          chainId: 80001,
-          url: RPC_MUMBAI,
-          accounts: [DUMMY_PRIVATE_KEY]
-        },
-        bscTest: {
-          chainId: 97,
-          url: `${RPC_BINANCE_TESTNET}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        optimismKovan: {
-          chainId: 69,
-          url: `${RPC_OPTIMISM_TESTNET}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        },
-        optimismGoerli: {
-          chainId: 420,
-          url: `${RPC_OPTIMISM_GOERLI}`,
-          accounts: [`${DUMMY_PRIVATE_KEY}`]
-        }
-      }
-    : {}
+  networks,
 }
 
 export default config

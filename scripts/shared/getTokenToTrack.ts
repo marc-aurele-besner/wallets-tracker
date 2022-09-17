@@ -3,7 +3,7 @@ export interface ITokensToTrack {
   tokens: string[]
 }
 
-const buildTokenToTrack = (tokensString, network) => {
+const buildTokenToTrack = (tokensString: string, network: string) => {
   const tokensObject: string[] = []
   const tokens = tokensString.split(',')
   for (const token of tokens) {

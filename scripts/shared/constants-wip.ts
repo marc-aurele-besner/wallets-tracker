@@ -1,6 +1,11 @@
+type Mainnet =  "mainnet"
+type Testnet = "testnet"
+
+type NetworkType = Testnet | Mainnet
 export interface INativeCurrency {
   network: string
   symbol: string
+  type: NetworkType
 }
 
 export interface ITokenStablecoin {
@@ -20,76 +25,94 @@ const nativeCurrency: INativeCurrency[] = [
   // Public Mainnet
   {
     network: 'ethereum',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "mainnet"
   },
   {
     network: 'polygon',
-    symbol: 'MATIC'
+    symbol: 'MATIC',
+    type: "mainnet"
   },
   {
     network: 'bsc',
-    symbol: 'BNB'
+    symbol: 'BNB',
+    type: "mainnet"
   },
   {
     network: 'optimism',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "mainnet"
   },
   {
     network: 'avalanche',
-    symbol: 'AVAX'
+    symbol: 'AVAX',
+    type: "mainnet"
   },
   {
     network: 'arbitrum',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "mainnet"
   },
   {
     network: 'cronos',
-    symbol: 'CRO'
+    symbol: 'CRO',
+    type: "mainnet"
   },
   {
     network: 'fantom',
-    symbol: 'FTM'
+    symbol: 'FTM',
+    type: "mainnet"
   },
   {
     network: 'klaytn',
-    symbol: 'KLAY'
+    symbol: 'KLAY',
+    type: "mainnet"
   },
   {
     network: 'kava',
-    symbol: 'KAVA'
+    symbol: 'KAVA',
+    type: "mainnet"
   },
   // Testnet
   {
     network: 'ropstein',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'rinkeby',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'goerli',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'kovan',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'mumbai',
-    symbol: 'MATIC'
+    symbol: 'MATIC',
+    type: "testnet"
   },
   {
     network: 'bscTest',
-    symbol: 'BNB'
+    symbol: 'BNB',
+    type: "testnet"
   },
   {
     network: 'optimismKovan',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'optimismGoerli',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   }
 ]
 

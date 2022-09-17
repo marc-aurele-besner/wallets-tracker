@@ -92,7 +92,7 @@ async function main() {
     <td>${balance.chainId}</td>
     <td>${balance.balance} ${balance.nativeCurrency}</td>
     <td>${balance.fiatValue} ${balance.fiatSymbol}</td>
-    <td>${balance.fiatBalanceValue} ${balance.fiatSymbol}</td>
+    <td>${balance.fiatBalanceValue}</td>
   </tr>`;
         }
         exportResults += `
@@ -118,7 +118,7 @@ async function main() {
     <td>${balance.tokenName}</td>
     <td>${balance.balance} ${balance.tokenSymbol}</td>
     <td>${balance.fiatValue} ${balance.fiatSymbol}</td>
-    <td>${balance.fiatBalanceValue} ${balance.fiatSymbol}</td>
+    <td>${balance.fiatBalanceValue}</td>
   </tr>`;
           }
         exportResults += `

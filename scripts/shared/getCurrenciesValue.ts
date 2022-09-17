@@ -67,8 +67,7 @@ const getCurrenciesValue = async (networks: INetwork[]) => {
               wrappedCurrenciesOfNetwork,
               tokensOfNetwork,
               pairFactoryOfNetwork,
-              owner,
-              'currency'
+              owner
             )
             tokenValue.value = value
             tokenValue.symbol = symbol

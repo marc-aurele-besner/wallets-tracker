@@ -72,7 +72,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
         // Get balance token 0 & 1
         const balanceTokenA = await TokenAContract.balanceOf(pair)
         const symbolTokenA = await TokenAContract.symbol()
-        if (type !== undefined && tokenB.find((token) => token.symbol === symbolTokenA)) {
+        if (tokenB.find((token) => token.symbol === symbolTokenA)) {
           tokenValue.type = 'stablecoin'
           tokenValue.symbol = symbolTokenA
         }

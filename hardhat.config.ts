@@ -22,6 +22,7 @@ const {
   RPC_AURORA,
   RPC_FUSION,
   RPC_CELO,
+  RPC_HUOBI,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -105,6 +106,11 @@ const networks = {
   celo: {
     chainId: 42220,
     url: `${RPC_CELO}`,
+    accounts
+  },
+  huobi: {
+    chainId: 128,
+    url: `${RPC_HUOBI}`,
     accounts
   },
   // Testnet

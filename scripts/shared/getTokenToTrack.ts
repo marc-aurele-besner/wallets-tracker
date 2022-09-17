@@ -35,6 +35,7 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_AURORA,
     TRACKING_TOKENS_FUSION,
     TRACKING_TOKENS_CELO,
+    TRACKING_TOKENS_HUOBI,
     // Public Testnet
     TRACKING_TOKENS_ROPSTEIN,
     TRACKING_TOKENS_RINKEBY,
@@ -61,6 +62,7 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_AURORA) tokens.push(buildTokenToTrack(TRACKING_TOKENS_AURORA, 'aurora'))
   if (TRACKING_TOKENS_FUSION) tokens.push(buildTokenToTrack(TRACKING_TOKENS_FUSION, 'fusion'))
   if (TRACKING_TOKENS_CELO) tokens.push(buildTokenToTrack(TRACKING_TOKENS_CELO, 'celo'))
+  if (TRACKING_TOKENS_HUOBI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_HUOBI, 'huobi'))
 
   // Get tokens to track for public testnet
   if (TRACKING_TOKENS_ROPSTEIN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ROPSTEIN, 'ropstein'))

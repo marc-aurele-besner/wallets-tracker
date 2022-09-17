@@ -82,6 +82,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'CELO',
     type: "mainnet"
   },
+  {
+    network: 'huobi',
+    symbol: 'HT',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

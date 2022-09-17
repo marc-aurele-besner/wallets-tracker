@@ -92,6 +92,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'MOVR',
     type: "mainnet"
   },
+  {
+    network: 'moonbeam',
+    symbol: 'GLMR',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

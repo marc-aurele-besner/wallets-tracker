@@ -18,7 +18,8 @@ const {
   RPC_KOVAN,
   RPC_MUMBAI,
   RPC_BINANCE_TESTNET,
-  RPC_OPTIMISM_TESTNET
+  RPC_OPTIMISM_TESTNET,
+  RPC_OPTIMISM_GOERLI
 } = process.env
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -97,9 +98,14 @@ const config: HardhatUserConfig = {
           url: `${RPC_BINANCE_TESTNET}`,
           accounts: [`${DUMMY_PRIVATE_KEY}`]
         },
-        optimismTest: {
+        optimismKovan: {
           chainId: 69,
           url: `${RPC_OPTIMISM_TESTNET}`,
+          accounts: [`${DUMMY_PRIVATE_KEY}`]
+        },
+        optimismGoerli: {
+          chainId: 420,
+          url: `${RPC_OPTIMISM_GOERLI}`,
           accounts: [`${DUMMY_PRIVATE_KEY}`]
         }
       }

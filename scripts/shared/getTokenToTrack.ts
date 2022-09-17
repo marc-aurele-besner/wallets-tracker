@@ -33,7 +33,8 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_KOVAN,
     TRACKING_TOKENS_MUMBAI,
     TRACKING_TOKENS_BINANCE_TESTNET,
-    TRACKING_TOKENS_OPTIMISM_TESTNET
+    TRACKING_TOKENS_OPTIMISM_TESTNET,
+    TRACKING_TOKENS_OPTIMISM_GOERLI
   } = process.env
 
   // Get tokens to track for public mainnet
@@ -50,7 +51,8 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_KOVAN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_KOVAN, 'kovan'))
   if (TRACKING_TOKENS_MUMBAI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MUMBAI, 'mumbai'))
   if (TRACKING_TOKENS_BINANCE_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_BINANCE_TESTNET, 'bscTest'))
-  if (TRACKING_TOKENS_OPTIMISM_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismTest'))
+  if (TRACKING_TOKENS_OPTIMISM_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismKovan'))
+  if (TRACKING_TOKENS_OPTIMISM_GOERLI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismGoerli'))
 
   return tokens
 }

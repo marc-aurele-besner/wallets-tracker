@@ -64,7 +64,7 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'BNB'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
     symbol: 'ETH'
   }
 ]
@@ -183,12 +183,12 @@ export const tokensStablecoin: ITokenStablecoin[] = [
     symbol: 'USDC'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
     address: '',
     symbol: 'USDC'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
     address: '0x4200000000000000000000000000000000000006',
     symbol: 'WETH'
   }
@@ -273,7 +273,7 @@ export const pairFactory: IPairFactory[] = [
     contractType: 'V2Factory'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'

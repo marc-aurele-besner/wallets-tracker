@@ -40,7 +40,7 @@ const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]
             address,
             chainId: network.chainId,
             network: network.name,
-            balance: ethers.utils.formatEther(balance),
+            balance: balance,
             nativeCurrency: network.nativeCurrency,
             fiatValue: '',
             fiatSymbol: ''

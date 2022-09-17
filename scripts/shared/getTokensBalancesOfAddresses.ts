@@ -18,6 +18,9 @@ export interface ITokensBalancesResult {
   balance: string
   tokenName: string
   tokenSymbol: string
+  type: string
+  decimalsTokenA: number
+  decimalsTokenB: number
   fiatValue: string
   fiatSymbol: string
 }
@@ -65,9 +68,6 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
             let tokenName = ''
             let tokenSymbol = ''
             let tokenDecimals = 0
-            let fiatValue = ''
-            let fiatSymbol = ''
-            let fiatDecimals = 0
             try {
               // Get ERC20 Contract
               const ERC20Contract = await new ethers.Contract(token, ERC20Factory.interface, owner)
@@ -77,22 +77,28 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
               tokenName = await ERC20Contract.name()
               // Get token symbol
               tokenSymbol = await ERC20Contract.symbol()
-              // Get token decimals
-              tokenDecimals = await ERC20Contract.decimals()
             } catch (error) {
               console.log('Error while getting balance for token ', token, ' for address ', address, ' on network ', network.name)
             }
             // Push result
             if (!tokensBalancesResults[address]) tokensBalancesResults[address] = []
             if (balance.gt(0)) {
-              const { value, symbol } = await getTokensValue(token, tokensStablecoinOfNetwork, pairFactoryOfNetwork, owner)
+              const { value, symbol, type, decimalsTokenA, decimalsTokenB } = await getTokensValue(
+                token,
+                tokensStablecoinOfNetwork,
+                pairFactoryOfNetwork,
+                owner
+              )
               await tokensBalancesResults[address].push({
                 address,
                 chainId: network.chainId,
                 network: network.name,
-                balance: ethers.utils.formatUnits(balance, tokenDecimals),
+                balance,
                 tokenName,
                 tokenSymbol,
+                type,
+                decimalsTokenA,
+                decimalsTokenB,
                 fiatValue: value,
                 fiatSymbol: symbol
               })

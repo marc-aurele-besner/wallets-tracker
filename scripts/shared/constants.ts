@@ -12,7 +12,7 @@ export interface ITokenStablecoin {
 export interface IPairFactory {
   network: string
   address: string
-  contractName: string,
+  contractName: string
   contractType: string
 }
 

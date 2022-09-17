@@ -1,10 +1,12 @@
 import { ethers } from 'hardhat'
 import { Wallet } from '@ethersproject/wallet'
-import { truncate } from 'fs'
 
 export interface ITokenValue {
   value: string
   symbol: string
+  decimalsTokenA: number
+  decimalsTokenB: number
+  type: string
   error: string
 }
 
@@ -21,10 +23,13 @@ export interface IPairFactoryOfNetwork {
 
 const { DUMMY_PRIVATE_KEY } = process.env
 
-const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet) => {
+const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet, type?: string) => {
   let tokenValue: ITokenValue = {
     value: 'TBD',
     symbol: '$',
+    decimalsTokenA: 0,
+    decimalsTokenB: 0,
+    type: '',
     error: ''
   }
   if (DUMMY_PRIVATE_KEY) {
@@ -36,7 +41,7 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
     while (!pairFactoryFound && pairFactory.length > pairId) {
       try {
         PairFactory = await ethers.getContractFactory(pairFactory[pairId].contractName)
-      } catch (error) { }
+      } catch (error) {}
       if (PairFactory) pairFactoryFound = true
       else pairId++
     }
@@ -53,12 +58,12 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
         tokenBAddress = tokenB[tokenBid].address
         try {
           // if (pairFactory[pairId].contractType === 'UniswapV2')
-            pair = await PairFactoryContract.getPair(tokenA, tokenBAddress)
-        } catch (error) { }
+          pair = await PairFactoryContract.getPair(tokenA, tokenBAddress)
+        } catch (error) {}
         if (pair && pair !== '0x0000000000000000000000000000000000000000') pairFound = true
         else tokenBid++
       }
-      if (pair && tokenBAddress && pair !== '0x0000000000000000000000000000000000000000' && tokenBAddress !== "") {
+      if (pair && tokenBAddress && pair !== '0x0000000000000000000000000000000000000000' && tokenBAddress !== '') {
         // Get ERC20 Factory
         const ERC20Factory = await ethers.getContractFactory('MockERC20Upgradeable')
         // Get ERC20 Contract
@@ -67,6 +72,10 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
         // Get balance token 0 & 1
         const balanceTokenA = await TokenAContract.balanceOf(pair)
         const symbolTokenA = await TokenAContract.symbol()
+        if (tokenB.find((token) => token.symbol === symbolTokenA)) {
+          tokenValue.type = 'stablecoin'
+          tokenValue.symbol = symbolTokenA
+        }
         const decimalsTokenA = ethers.BigNumber.from(await TokenAContract.decimals())
 
         const balanceTokenB = await TokenBContract.balanceOf(pair)
@@ -77,18 +86,18 @@ const getTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[
           const bitTen = ethers.BigNumber.from(10)
           const value = ethers.BigNumber.from(balanceTokenB)
             .mul(bitTen.pow(decimalsTokenA))
-            .div(balanceTokenA.div(bitTen.pow(decimalsTokenA.sub(decimalsTokenB))))
+            .div(balanceTokenA.div(bitTen.pow(decimalsTokenA)))
           tokenValue = {
-            value: ethers.utils.formatUnits(value, decimalsTokenA),
-            symbol: symbolTokenB,
+            value: value.toString(),
+            symbol: tokenValue.type !== 'stablecoin' ? symbolTokenB : tokenValue.symbol,
+            decimalsTokenA: decimalsTokenA.toNumber(),
+            decimalsTokenB: decimalsTokenB.toNumber(),
+            type: tokenValue.type,
             error: ''
           }
           return tokenValue
         } else tokenValue.error = 'Balance token B is 0'
-      } else {
-        tokenValue.error = 'No pair found for ' + tokenA + ' and ' + tokenBAddress
-        console.log('No pair found for ', tokenA, ' and ', tokenBAddress)
-      }
+      } else tokenValue.error = 'No pair found for ' + tokenA + ' and ' + tokenBAddress
     } else tokenValue.error = 'No pair factory found'
   }
   return tokenValue

@@ -67,6 +67,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'xDAI',
     type: "mainnet"
   },
+  {
+    network: 'aurora',
+    symbol: 'ETH',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

@@ -19,6 +19,7 @@ const {
   RPC_KLAYTN,
   RPC_KAVA,
   RPC_GNOSIS,
+  RPC_AURORA,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -87,6 +88,11 @@ const networks = {
   gnosis: {
     chainId: 100,
     url: `${RPC_GNOSIS}`,
+    accounts
+  },
+  aurora: {
+    chainId: 1313161554,
+    url: `${RPC_AURORA}`,
     accounts
   },
   // Testnet

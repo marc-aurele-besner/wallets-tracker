@@ -18,6 +18,7 @@ const {
   RPC_FANTOM,
   RPC_KLAYTN,
   RPC_KAVA,
+  RPC_GNOSIS,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -81,6 +82,11 @@ const networks = {
   kava: {
     chainId: 2222,
     url: `${RPC_KAVA}`,
+    accounts
+  },
+  gnosis: {
+    chainId: 100,
+    url: `${RPC_GNOSIS}`,
     accounts
   },
   // Testnet

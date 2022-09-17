@@ -31,6 +31,7 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_FANTOM,
     TRACKING_TOKENS_KLAYTN,
     TRACKING_TOKENS_KAVA,
+    TRACKING_TOKENS_GNOSIS,
     // Public Testnet
     TRACKING_TOKENS_ROPSTEIN,
     TRACKING_TOKENS_RINKEBY,
@@ -53,6 +54,7 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_FANTOM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_FANTOM, 'fantom'))
   if (TRACKING_TOKENS_KLAYTN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_KLAYTN, 'klaytn'))
   if (TRACKING_TOKENS_KAVA) tokens.push(buildTokenToTrack(TRACKING_TOKENS_KAVA, 'kava'))
+  if (TRACKING_TOKENS_GNOSIS) tokens.push(buildTokenToTrack(TRACKING_TOKENS_GNOSIS, 'gnosis'))
 
   // Get tokens to track for public testnet
   if (TRACKING_TOKENS_ROPSTEIN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ROPSTEIN, 'ropstein'))

@@ -62,6 +62,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'KAVA',
     type: "mainnet"
   },
+  {
+    network: 'gnosis',
+    symbol: 'xDAI',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

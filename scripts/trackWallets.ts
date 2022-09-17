@@ -11,6 +11,8 @@ async function main() {
   const valueOfCurrencies = await helper.getCurrenciesValue(networks)
   if (networks && addresses) {
     const walletBalancesResult = await helper.getBalancesOfAddresses(networks, addresses)
+    // Console log amount of addresses to track
+    console.log('Querying ', networks.length, '  networks')
     // Console log result
     console.log('Networks to track: ')
     console.table(networks)

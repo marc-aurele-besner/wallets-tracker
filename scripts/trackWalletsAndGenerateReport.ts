@@ -141,6 +141,8 @@ async function main() {
     if (SEND_EMAIL === 'true') {
       exportResults += `
 
+## Querying ${networks.length} networks
+
 ## Networks to track
 <table>
   <tr>

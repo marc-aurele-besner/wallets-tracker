@@ -46,9 +46,10 @@ async function main() {
       const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
         const valueOfCurrency = valueOfCurrencies.find((currency) => currency.chainId === result.chainId)
         return {
+          networkType: result.networkType,
           chainId: result.chainId,
           network: result.network,
-          balance: result.balance,
+          balance: ethers.utils.formatEther(result.balance),
           nativeCurrency: result.nativeCurrency,
           fiatValue: valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
             ?
@@ -63,10 +64,11 @@ async function main() {
       const tokensBalancesList = tokensBalancesResult[address] ? tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
         const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA)
         return {
+          networkType: result.networkType,
           chainId: result.chainId,
           network: result.network,
           tokenName: result.tokenName,
-          balance: result.balance,
+          balance: balanceFormatted,
           tokenSymbol: result.tokenSymbol,
           fiatValue: helper.getValueFormatted(result.type, balanceFormatted, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB),
           fiatSymbol: result.fiatSymbol,
@@ -79,6 +81,7 @@ async function main() {
 ## Balance of ${address}
 <table>
   <tr>
+    <th>Type</th>
     <th>Network</th>
     <th>ChainId</th>
     <th>Balance</th>
@@ -88,6 +91,7 @@ async function main() {
         for (const balance of balancesList) {
           exportResults += `
   <tr>
+    <td><small>${balance.networkType}</small></td>
     <td>${balance.network}</td>
     <td>${balance.chainId}</td>
     <td>${balance.balance} ${balance.nativeCurrency}</td>
@@ -103,6 +107,7 @@ async function main() {
 ### Tokens balances of ${address}
 <table>
   <tr>
+    <th>Type</th>
     <th>Network</th>
     <th>ChainId</th>
     <th>Token</th>
@@ -113,6 +118,7 @@ async function main() {
           for (const balance of tokensBalancesList) {
             exportResults += `
   <tr>
+    <td><small>${balance.networkType}</small></td>
     <td>${balance.network}</td>
     <td>${balance.chainId}</td>
     <td>${balance.tokenName}</td>
@@ -138,6 +144,7 @@ async function main() {
 ## Networks to track
 <table>
   <tr>
+    <th>Type</th>
     <th>Network</th>
     <th>ChainId</th>
     <th>Native Currency</th>
@@ -146,6 +153,7 @@ async function main() {
     for (const network of networks) {
       exportResults += `
   <tr>
+    <td><small>${network.type}</small></td>
     <td>${network.name}</td>
     <td>${network.chainId}</td>
     <td>${network.nativeCurrency}</td>

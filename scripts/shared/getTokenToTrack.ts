@@ -3,7 +3,7 @@ export interface ITokensToTrack {
   tokens: string[]
 }
 
-const buildTokenToTrack = (tokensString, network) => {
+const buildTokenToTrack = (tokensString: string, network: string) => {
   const tokensObject: string[] = []
   const tokens = tokensString.split(',')
   for (const token of tokens) {
@@ -26,6 +26,20 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_BINANCE,
     TRACKING_TOKENS_OPTIMISM,
     TRACKING_TOKENS_AVALANCHE,
+    TRACKING_TOKENS_ARBITRUM,
+    TRACKING_TOKENS_CHRONOS,
+    TRACKING_TOKENS_FANTOM,
+    TRACKING_TOKENS_KLAYTN,
+    TRACKING_TOKENS_KAVA,
+    TRACKING_TOKENS_GNOSIS,
+    TRACKING_TOKENS_AURORA,
+    TRACKING_TOKENS_FUSION,
+    TRACKING_TOKENS_CELO,
+    TRACKING_TOKENS_HUOBI,
+    TRACKING_TOKENS_MOONRIVER,
+    TRACKING_TOKENS_MOONBEAM,
+    TRACKING_TOKENS_RSK,
+    TRACKING_TOKENS_METIS,
     // Public Testnet
     TRACKING_TOKENS_ROPSTEIN,
     TRACKING_TOKENS_RINKEBY,
@@ -33,7 +47,8 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_KOVAN,
     TRACKING_TOKENS_MUMBAI,
     TRACKING_TOKENS_BINANCE_TESTNET,
-    TRACKING_TOKENS_OPTIMISM_TESTNET
+    TRACKING_TOKENS_OPTIMISM_TESTNET,
+    TRACKING_TOKENS_OPTIMISM_GOERLI
   } = process.env
 
   // Get tokens to track for public mainnet
@@ -42,6 +57,20 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_BINANCE) tokens.push(buildTokenToTrack(TRACKING_TOKENS_BINANCE, 'bsc'))
   if (TRACKING_TOKENS_OPTIMISM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM, 'optimism'))
   if (TRACKING_TOKENS_AVALANCHE) tokens.push(buildTokenToTrack(TRACKING_TOKENS_AVALANCHE, 'avalanche'))
+  if (TRACKING_TOKENS_ARBITRUM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ARBITRUM, 'arbitrum'))
+  if (TRACKING_TOKENS_CHRONOS) tokens.push(buildTokenToTrack(TRACKING_TOKENS_CHRONOS, 'cronos'))
+  if (TRACKING_TOKENS_FANTOM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_FANTOM, 'fantom'))
+  if (TRACKING_TOKENS_KLAYTN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_KLAYTN, 'klaytn'))
+  if (TRACKING_TOKENS_KAVA) tokens.push(buildTokenToTrack(TRACKING_TOKENS_KAVA, 'kava'))
+  if (TRACKING_TOKENS_GNOSIS) tokens.push(buildTokenToTrack(TRACKING_TOKENS_GNOSIS, 'gnosis'))
+  if (TRACKING_TOKENS_AURORA) tokens.push(buildTokenToTrack(TRACKING_TOKENS_AURORA, 'aurora'))
+  if (TRACKING_TOKENS_FUSION) tokens.push(buildTokenToTrack(TRACKING_TOKENS_FUSION, 'fusion'))
+  if (TRACKING_TOKENS_CELO) tokens.push(buildTokenToTrack(TRACKING_TOKENS_CELO, 'celo'))
+  if (TRACKING_TOKENS_HUOBI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_HUOBI, 'huobi'))
+  if (TRACKING_TOKENS_MOONRIVER) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MOONRIVER, 'moonriver'))
+  if (TRACKING_TOKENS_MOONBEAM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MOONBEAM, 'moonbeam'))
+  if (TRACKING_TOKENS_RSK) tokens.push(buildTokenToTrack(TRACKING_TOKENS_RSK, 'rsk'))
+  if (TRACKING_TOKENS_METIS) tokens.push(buildTokenToTrack(TRACKING_TOKENS_METIS, 'metis'))
 
   // Get tokens to track for public testnet
   if (TRACKING_TOKENS_ROPSTEIN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ROPSTEIN, 'ropstein'))
@@ -50,7 +79,8 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_KOVAN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_KOVAN, 'kovan'))
   if (TRACKING_TOKENS_MUMBAI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MUMBAI, 'mumbai'))
   if (TRACKING_TOKENS_BINANCE_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_BINANCE_TESTNET, 'bscTest'))
-  if (TRACKING_TOKENS_OPTIMISM_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismTest'))
+  if (TRACKING_TOKENS_OPTIMISM_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismKovan'))
+  if (TRACKING_TOKENS_OPTIMISM_GOERLI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_GOERLI, 'optimismGoerli'))
 
   return tokens
 }

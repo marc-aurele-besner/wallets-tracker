@@ -1,14 +1,11 @@
 import { ethers } from 'hardhat'
 
-interface INetworks {
-  name: string
-  url: string
-  chainId: number
-  nativeCurrency: string
-}
+import { TNetworkType } from './constants'
+import { INetwork } from './getNetworks'
 
 export interface IWalletBalancesResult {
   address: string
+  networkType: TNetworkType
   chainId: number
   network: number
   balance: string
@@ -17,7 +14,7 @@ export interface IWalletBalancesResult {
   fiatSymbol: string
 }
 
-const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]) => {
+const getBalancesOfAddresses = async (networks: INetwork[], addresses: string[]) => {
   let finalResults: IWalletBalancesResult[] = []
   // Loop all networks
   for (const network of networks) {
@@ -38,6 +35,7 @@ const getBalancesOfAddresses = async (networks: INetworks[], addresses: string[]
         if (balance.gt(0))
           finalResults[address].push({
             address,
+            networkType: network.type,
             chainId: network.chainId,
             network: network.name,
             balance: balance,

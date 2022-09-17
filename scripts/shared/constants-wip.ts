@@ -1,6 +1,11 @@
+type Mainnet =  "mainnet"
+type Testnet = "testnet"
+
+type NetworkType = Testnet | Mainnet
 export interface INativeCurrency {
   network: string
   symbol: string
+  type: NetworkType
 }
 
 export interface ITokenStablecoin {
@@ -20,52 +25,94 @@ const nativeCurrency: INativeCurrency[] = [
   // Public Mainnet
   {
     network: 'ethereum',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "mainnet"
   },
   {
     network: 'polygon',
-    symbol: 'MATIC'
+    symbol: 'MATIC',
+    type: "mainnet"
   },
   {
     network: 'bsc',
-    symbol: 'BNB'
+    symbol: 'BNB',
+    type: "mainnet"
   },
   {
     network: 'optimism',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "mainnet"
   },
   {
     network: 'avalanche',
-    symbol: 'AVAX'
+    symbol: 'AVAX',
+    type: "mainnet"
+  },
+  {
+    network: 'arbitrum',
+    symbol: 'ETH',
+    type: "mainnet"
+  },
+  {
+    network: 'cronos',
+    symbol: 'CRO',
+    type: "mainnet"
+  },
+  {
+    network: 'fantom',
+    symbol: 'FTM',
+    type: "mainnet"
+  },
+  {
+    network: 'klaytn',
+    symbol: 'KLAY',
+    type: "mainnet"
+  },
+  {
+    network: 'kava',
+    symbol: 'KAVA',
+    type: "mainnet"
   },
   // Testnet
   {
     network: 'ropstein',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'rinkeby',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'goerli',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'kovan',
-    symbol: 'ETH'
+    symbol: 'ETH',
+    type: "testnet"
   },
   {
     network: 'mumbai',
-    symbol: 'MATIC'
+    symbol: 'MATIC',
+    type: "testnet"
   },
   {
     network: 'bscTest',
-    symbol: 'BNB'
+    symbol: 'BNB',
+    type: "testnet"
   },
   {
-    network: 'optimismTest',
-    symbol: 'ETH'
+    network: 'optimismKovan',
+    symbol: 'ETH',
+    type: "testnet"
+  },
+  {
+    network: 'optimismGoerli',
+    symbol: 'ETH',
+    type: "testnet"
   }
 ]
 
@@ -131,6 +178,31 @@ export const tokensStablecoin: ITokenStablecoin[] = [
     address: '',
     symbol: 'USDC'
   },
+  {
+    network: 'arbitrum',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'cronos',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'fantom',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'klaytn',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'kava',
+    address: '',
+    symbol: 'USDC'
+  },
   // Testnet
   {
     network: 'ropstein',
@@ -183,15 +255,20 @@ export const tokensStablecoin: ITokenStablecoin[] = [
     symbol: 'USDC'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
     address: '',
     symbol: 'USDC'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
     address: '0x4200000000000000000000000000000000000006',
     symbol: 'WETH'
-  }
+  },
+  {
+    network: 'optimismGoerli',
+    address: '',
+    symbol: 'USDC'
+  },
 ]
 
 export const pairFactory: IPairFactory[] = [
@@ -229,6 +306,48 @@ export const pairFactory: IPairFactory[] = [
     network: 'bsc',
     address: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
     contractName: 'PancakeFactory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'optimism',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'avalanche',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'arbitrum',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'cronos',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'fantom',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'klaytn',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'kava',
+    address: '',
+    contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'
   },
   // Testnet
@@ -273,7 +392,13 @@ export const pairFactory: IPairFactory[] = [
     contractType: 'V2Factory'
   },
   {
-    network: 'optimismTest',
+    network: 'optimismKovan',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'optimismGoerli',
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'

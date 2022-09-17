@@ -1,18 +1,13 @@
 import { ethers } from 'hardhat'
 
-import { tokensStablecoin, pairFactory } from './constants'
+import { tokensStablecoin, pairFactory, TNetworkType } from './constants'
 import { ITokensToTrack } from './getTokenToTrack'
 import getTokensValue from './getTokensValue'
-
-interface INetworks {
-  name: string
-  url: string
-  chainId: number
-  nativeCurrency: string
-}
+import { INetwork } from './getNetworks'
 
 export interface ITokensBalancesResult {
   address: string
+  networkType: TNetworkType
   chainId: number
   network: number
   balance: string
@@ -27,7 +22,7 @@ export interface ITokensBalancesResult {
 
 const { DUMMY_PRIVATE_KEY } = process.env
 
-const getTokensBalancesOfAddresses = async (networks: INetworks[], address: string, allTokens: ITokensToTrack[]) => {
+const getTokensBalancesOfAddresses = async (networks: INetwork[], address: string, allTokens: ITokensToTrack[]) => {
   let tokensBalancesResults: ITokensBalancesResult[] = []
   if (DUMMY_PRIVATE_KEY) {
     // Loop all networks
@@ -91,6 +86,7 @@ const getTokensBalancesOfAddresses = async (networks: INetworks[], address: stri
               )
               await tokensBalancesResults[address].push({
                 address,
+                networkType: network.type,
                 chainId: network.chainId,
                 network: network.name,
                 balance,

@@ -21,6 +21,7 @@ async function main() {
       const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
         const valueOfCurrency = valueOfCurrencies.find((currency) => currency.chainId === result.chainId)
         return {
+          networkType: result.networkType,
           chainId: result.chainId,
           network: result.network,
           balance: ethers.utils.formatEther(result.balance),
@@ -47,6 +48,7 @@ async function main() {
       const tokensBalancesList = tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
         const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA)
         return {
+          networkType: result.networkType,
           chainId: result.chainId,
           network: result.network,
           tokenName: result.tokenName,

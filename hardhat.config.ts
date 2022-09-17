@@ -25,6 +25,7 @@ const {
   RPC_HUOBI,
   RPC_MOONRIVER,
   RPC_MOONBEAM,
+  RPC_RSK,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -123,6 +124,11 @@ const networks = {
   moonbeam: {
     chainId: 1284,
     url: `${RPC_MOONBEAM}`,
+    accounts
+  },
+  rsk: {
+    chainId: 30,
+    url: `${RPC_RSK}`,
     accounts
   },
   // Testnet

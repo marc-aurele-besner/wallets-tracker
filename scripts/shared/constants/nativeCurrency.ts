@@ -97,6 +97,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'GLMR',
     type: "mainnet"
   },
+  {
+    network: 'rsk',
+    symbol: 'RBTC',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

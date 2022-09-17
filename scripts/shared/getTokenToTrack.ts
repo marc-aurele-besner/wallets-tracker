@@ -38,6 +38,7 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_HUOBI,
     TRACKING_TOKENS_MOONRIVER,
     TRACKING_TOKENS_MOONBEAM,
+    TRACKING_TOKENS_RSK,
     // Public Testnet
     TRACKING_TOKENS_ROPSTEIN,
     TRACKING_TOKENS_RINKEBY,
@@ -67,6 +68,7 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_HUOBI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_HUOBI, 'huobi'))
   if (TRACKING_TOKENS_MOONRIVER) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MOONRIVER, 'moonriver'))
   if (TRACKING_TOKENS_MOONBEAM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MOONBEAM, 'moonbeam'))
+  if (TRACKING_TOKENS_RSK) tokens.push(buildTokenToTrack(TRACKING_TOKENS_RSK, 'rsk'))
 
   // Get tokens to track for public testnet
   if (TRACKING_TOKENS_ROPSTEIN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ROPSTEIN, 'ropstein'))

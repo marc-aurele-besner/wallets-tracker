@@ -138,6 +138,11 @@ const tokensStablecoin: ITokenStablecoin[] = [
       symbol: 'WETH'
     },
     {
+      network: 'mumbai',
+      address: '0x001B3B4d0F3714Ca98ba10F6042DaEbF0B1B7b6F',
+      symbol: 'DAI'
+    },
+    {
       network: 'bscTest',
       address: '',
       symbol: 'USDC'
@@ -146,6 +151,16 @@ const tokensStablecoin: ITokenStablecoin[] = [
       network: 'optimismKovan',
       address: '',
       symbol: 'USDC'
+    },
+    {
+      network: 'optimismKovan',
+      address: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
+      symbol: 'DAI'
+    },
+    {
+      network: 'optimismKovan',
+      address: '0xbC6F6b680bc61e30dB47721c6D1c5cde19C1300d',
+      symbol: 'WETH'
     },
     {
       network: 'optimismKovan',

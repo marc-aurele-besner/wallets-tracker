@@ -66,6 +66,10 @@ const nativeCurrency: INativeCurrency[] = [
   {
     network: 'optimismKovan',
     symbol: 'ETH'
+  },
+  {
+    network: 'optimismGoerli',
+    symbol: 'ETH'
   }
 ]
 
@@ -191,7 +195,12 @@ export const tokensStablecoin: ITokenStablecoin[] = [
     network: 'optimismKovan',
     address: '0x4200000000000000000000000000000000000006',
     symbol: 'WETH'
-  }
+  },
+  {
+    network: 'optimismGoerli',
+    address: '',
+    symbol: 'USDC'
+  },
 ]
 
 export const pairFactory: IPairFactory[] = [
@@ -274,6 +283,12 @@ export const pairFactory: IPairFactory[] = [
   },
   {
     network: 'optimismKovan',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  }
+  {
+    network: 'optimismGoerli',
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'

@@ -152,10 +152,12 @@ async function main() {
         exportResults += `
   </tbody>
 </table>
-
-### Total balance value for ${address} addresses: ${totalValueWallet[address]} (crypto + tokens)
 `;
         }
+        exportResults += `
+      
+      ### Total balance value for ${address} addresses: ${totalValueWallet[address]} (crypto + tokens)
+`;
       }
   }
     // Network list

@@ -14,7 +14,7 @@ export interface ICurrencyValue {
   error: string
 }
 
-const { DUMMY_PRIVATE_KEY } = process.env
+const { DUMMY_PRIVATE_KEY, SEND_EMAIL } = process.env
 
 const getCurrenciesValue = async (networks: INetwork[]) => {
   let currencyValue: ICurrencyValue[] = []
@@ -74,7 +74,9 @@ const getCurrenciesValue = async (networks: INetwork[]) => {
             tokenValue.decimalsTokenA = decimalsTokenA
             tokenValue.decimalsTokenB = decimalsTokenB
           }
-        } else console.log('No tokens of network', network.name)
+        } else {
+          if (SEND_EMAIL !== 'true') console.log('No tokens of network', network.name)
+        }
       }
       currencyValue.push(tokenValue)
     }

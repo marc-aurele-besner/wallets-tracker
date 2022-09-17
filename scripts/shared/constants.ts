@@ -48,7 +48,11 @@ const nativeCurrency: INativeCurrency[] = [
   },
   {
     network: 'fantom',
-    symbol: 'CRO'
+    symbol: 'FTM'
+  },
+  {
+    network: 'klaytn',
+    symbol: 'KLAY'
   },
   // Testnet
   {
@@ -159,6 +163,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
   },
   {
     network: 'fantom',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'klaytn',
     address: '',
     symbol: 'USDC'
   },
@@ -293,6 +302,12 @@ export const pairFactory: IPairFactory[] = [
   },
   {
     network: 'fantom',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'klaytn',
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'

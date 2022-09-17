@@ -87,6 +87,11 @@ const nativeCurrency: INativeCurrency[] = [
     symbol: 'HT',
     type: "mainnet"
   },
+  {
+    network: 'moonriver',
+    symbol: 'MOVR',
+    type: "mainnet"
+  },
   // Testnet
   {
     network: 'ropstein',

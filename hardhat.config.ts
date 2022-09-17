@@ -23,6 +23,7 @@ const {
   RPC_FUSION,
   RPC_CELO,
   RPC_HUOBI,
+  RPC_MOONRIVER,
   // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
@@ -111,6 +112,11 @@ const networks = {
   huobi: {
     chainId: 128,
     url: `${RPC_HUOBI}`,
+    accounts
+  },
+  moonriver: {
+    chainId: 1285,
+    url: `${RPC_MOONRIVER}`,
     accounts
   },
   // Testnet

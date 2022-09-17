@@ -155,8 +155,8 @@ async function main() {
 `;
         }
         exportResults += `
-      
-      ### Total balance value for ${address} addresses: ${totalValueWallet[address]} (crypto + tokens)
+
+### Total balance value for ${address} addresses: ${totalValueWallet[address]} (crypto + tokens)
 `;
       }
   }

@@ -26,13 +26,28 @@ async function main() {
       const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
         const valueOfCurrency = valueOfCurrencies.find((currency) => currency.chainId === result.chainId)
         const balanceFormatted = ethers.utils.formatEther(result.balance)
-        const fiatValueFormatted = valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
-          ? helper.getValueFormatted('', '1', valueOfCurrency.value, valueOfCurrency?.decimalsTokenA || 0, valueOfCurrency?.decimalsTokenB || 0)
-          : 'TBD'
-        const fiatBalanceValueFormatted = helper.getBalanceValueFormatted('', result.balance, valueOfCurrency?.value || '', valueOfCurrency?.decimalsTokenA || 0, valueOfCurrency?.decimalsTokenB || 0)
+        const fiatValueFormatted =
+          valueOfCurrency?.value && valueOfCurrency?.value !== 'TBD'
+            ? helper.getValueFormatted('', '1', valueOfCurrency.value, valueOfCurrency?.decimalsTokenA || 0, valueOfCurrency?.decimalsTokenB || 0)
+            : 'TBD'
+        const fiatBalanceValueFormatted = helper.getBalanceValueFormatted(
+          '',
+          result.balance,
+          valueOfCurrency?.value || '',
+          valueOfCurrency?.decimalsTokenA || 0,
+          valueOfCurrency?.decimalsTokenB || 0
+        )
         if (fiatBalanceValueFormatted && fiatBalanceValueFormatted !== 'TBD') {
-          totalValueAllWallets = totalValueAllWallets.add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0]).mul(100).add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1])))
-          totalValueWallet[address] = totalValueWallet[address].add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0]).mul(100).add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1])))
+          totalValueAllWallets = totalValueAllWallets.add(
+            ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0])
+              .mul(100)
+              .add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1]))
+          )
+          totalValueWallet[address] = totalValueWallet[address].add(
+            ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0])
+              .mul(100)
+              .add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1]))
+          )
         }
         return {
           networkType: result.networkType,
@@ -53,10 +68,24 @@ async function main() {
       const tokensBalancesList = tokensBalancesResult[address].map((result: ITokensBalancesResult) => {
         const balanceFormatted = ethers.utils.formatUnits(result.balance, result.decimalsTokenA)
         const fiatValueFormatted = helper.getValueFormatted(result.type, balanceFormatted, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB)
-        const fiatBalanceValueFormatted = helper.getBalanceValueFormatted(result.type, result.balance, result.fiatValue, result.decimalsTokenA, result.decimalsTokenB)
+        const fiatBalanceValueFormatted = helper.getBalanceValueFormatted(
+          result.type,
+          result.balance,
+          result.fiatValue,
+          result.decimalsTokenA,
+          result.decimalsTokenB
+        )
         if (fiatBalanceValueFormatted && fiatBalanceValueFormatted !== 'TBD') {
-          totalValueAllWallets = totalValueAllWallets.add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0]).mul(100).add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1])))
-          totalValueWallet[address] = totalValueWallet[address].add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0]).mul(100).add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1])))
+          totalValueAllWallets = totalValueAllWallets.add(
+            ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0])
+              .mul(100)
+              .add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1]))
+          )
+          totalValueWallet[address] = totalValueWallet[address].add(
+            ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[0])
+              .mul(100)
+              .add(ethers.BigNumber.from(fiatBalanceValueFormatted.split('.')[1]))
+          )
         }
         return {
           networkType: result.networkType,

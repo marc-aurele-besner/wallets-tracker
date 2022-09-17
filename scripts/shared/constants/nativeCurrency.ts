@@ -1,6 +1,6 @@
-type TMainnet =  "mainnet"
-type TTestnet = "testnet"
-type TUnknown = "unknown"
+type TMainnet = 'mainnet'
+type TTestnet = 'testnet'
+type TUnknown = 'unknown'
 
 export type TNetworkType = TMainnet | TTestnet | TUnknown
 
@@ -15,138 +15,138 @@ const nativeCurrency: INativeCurrency[] = [
   {
     network: 'ethereum',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'polygon',
     symbol: 'MATIC',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'bsc',
     symbol: 'BNB',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'optimism',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'avalanche',
     symbol: 'AVAX',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'arbitrum',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'cronos',
     symbol: 'CRO',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'fantom',
     symbol: 'FTM',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'klaytn',
     symbol: 'KLAY',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'kava',
     symbol: 'KAVA',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'gnosis',
     symbol: 'xDAI',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'aurora',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'fusion',
     symbol: 'FSN',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'celo',
     symbol: 'CELO',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'huobi',
     symbol: 'HT',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'moonriver',
     symbol: 'MOVR',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'moonbeam',
     symbol: 'GLMR',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'rsk',
     symbol: 'RBTC',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'metis',
     symbol: 'METIS',
-    type: "mainnet"
+    type: 'mainnet'
   },
   // Testnet
   {
     network: 'ropstein',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'rinkeby',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'goerli',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'kovan',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'mumbai',
     symbol: 'MATIC',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'bscTest',
     symbol: 'BNB',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'optimismKovan',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'optimismGoerli',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   }
 ]
 

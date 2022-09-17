@@ -26,7 +26,14 @@ export interface IPairFactoryOfNetwork {
 
 const { DUMMY_PRIVATE_KEY } = process.env
 
-const getMultipleTypeTokensValue = async (tokenA: string, tokenB: ITokenStablecoinOfNetwork[], pairFactory: IPairFactoryOfNetwork[], owner: Wallet, network: string, type?: string) => {
+const getMultipleTypeTokensValue = async (
+  tokenA: string,
+  tokenB: ITokenStablecoinOfNetwork[],
+  pairFactory: IPairFactoryOfNetwork[],
+  owner: Wallet,
+  network: string,
+  type?: string
+) => {
   let tokenValue: ITokenValue = {
     value: 'TBD',
     symbol: '$',
@@ -42,8 +49,8 @@ const getMultipleTypeTokensValue = async (tokenA: string, tokenB: ITokenStableco
     let tokenTypeFound = false
     let tokenTypeTry = 0
 
-    while(!tokenTypeFound && tokensTypes.length > tokenTypeTry) {
-    // To-Do: Verify first if the token is a LP token, if so, get the factory(), token0(), token1() and skip the while loop
+    while (!tokenTypeFound && tokensTypes.length > tokenTypeTry) {
+      // To-Do: Verify first if the token is a LP token, if so, get the factory(), token0(), token1() and skip the while loop
       try {
         switch (tokensTypes[tokenTypeTry]) {
           case 'LP':
@@ -64,7 +71,14 @@ const getMultipleTypeTokensValue = async (tokenA: string, tokenB: ITokenStableco
                   const token0instance = await new ethers.Contract(token0, ERC20Factory.interface, owner)
                   const balance = await token0instance.balanceOf(tokenA)
                   const TokensValue = await getTokensValue(token0, tokenB, pairFactory, owner)
-                  value = (((balance.mul(2).mul(bigTen.pow(decimals))).div(totalSupply)).mul(TokensValue.value)).mul(bigTen.pow(decimals)).div(bigTen.pow(decimals)).div(bigTen.pow(decimals))
+                  value = balance
+                    .mul(2)
+                    .mul(bigTen.pow(decimals))
+                    .div(totalSupply)
+                    .mul(TokensValue.value)
+                    .mul(bigTen.pow(decimals))
+                    .div(bigTen.pow(decimals))
+                    .div(bigTen.pow(decimals))
                   tokenValue = {
                     value: value.toString(),
                     symbol: TokensValue.symbol,
@@ -78,7 +92,14 @@ const getMultipleTypeTokensValue = async (tokenA: string, tokenB: ITokenStableco
                   const token1instance = await new ethers.Contract(token1, ERC20Factory.interface, owner)
                   const balance = await token1instance.balanceOf(tokenA)
                   const TokensValue = await getTokensValue(token1, tokenB, pairFactory, owner)
-                  value = (((balance.mul(2).mul(bigTen.pow(decimals))).div(totalSupply)).mul(TokensValue.value)).mul(bigTen.pow(decimals)).div(bigTen.pow(decimals)).div(bigTen.pow(decimals))
+                  value = balance
+                    .mul(2)
+                    .mul(bigTen.pow(decimals))
+                    .div(totalSupply)
+                    .mul(TokensValue.value)
+                    .mul(bigTen.pow(decimals))
+                    .div(bigTen.pow(decimals))
+                    .div(bigTen.pow(decimals))
                   tokenValue = {
                     value: value.toString(),
                     symbol: TokensValue.symbol,
@@ -91,7 +112,7 @@ const getMultipleTypeTokensValue = async (tokenA: string, tokenB: ITokenStableco
               }
             } catch (error) {}
             break
-          case 'AMTOKEN' :
+          case 'AMTOKEN':
             try {
               const tokenInstance = await new ethers.Contract(tokenA, ERC20Factory.interface, owner)
               const symbol = await tokenInstance.symbol()
@@ -108,7 +129,7 @@ const getMultipleTypeTokensValue = async (tokenA: string, tokenB: ITokenStableco
               }
             } catch (error) {}
             break
-          case 'ERC20' :
+          case 'ERC20':
             tokenValue = await getTokensValue(tokenA, tokenB, pairFactory, owner, type)
             break
         }

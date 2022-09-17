@@ -2,7 +2,7 @@ import { ethers } from 'hardhat'
 
 import { tokensStablecoin, pairFactory, TNetworkType } from './constants'
 import { ITokensToTrack } from './getTokenToTrack'
-import getTokensValue from './getTokensValue'
+import getMultipleTypeTokensValue from './getMultipleTypeTokensValue'
 import { INetwork } from './getNetworks'
 
 export interface ITokensBalancesResult {
@@ -20,7 +20,7 @@ export interface ITokensBalancesResult {
   fiatSymbol: string
 }
 
-const { DUMMY_PRIVATE_KEY } = process.env
+const { DUMMY_PRIVATE_KEY, SEND_EMAIL } = process.env
 
 const getTokensBalancesOfAddresses = async (networks: INetwork[], address: string, allTokens: ITokensToTrack[]) => {
   let tokensBalancesResults: ITokensBalancesResult[] = []
@@ -73,16 +73,17 @@ const getTokensBalancesOfAddresses = async (networks: INetwork[], address: strin
               // Get token symbol
               tokenSymbol = await ERC20Contract.symbol()
             } catch (error) {
-              console.log('Error while getting balance for token ', token, ' for address ', address, ' on network ', network.name)
+              if (SEND_EMAIL !== 'true') console.log('Error while getting balance for token ', token, ' for address ', address, ' on network ', network.name)
             }
             // Push result
             if (!tokensBalancesResults[address]) tokensBalancesResults[address] = []
             if (balance.gt(0)) {
-              const { value, symbol, type, decimalsTokenA, decimalsTokenB } = await getTokensValue(
+              const { value, symbol, type, decimalsTokenA, decimalsTokenB } = await getMultipleTypeTokensValue(
                 token,
                 tokensStablecoinOfNetwork,
                 pairFactoryOfNetwork,
-                owner
+                owner,
+                network.name
               )
               await tokensBalancesResults[address].push({
                 address,
@@ -101,7 +102,7 @@ const getTokensBalancesOfAddresses = async (networks: INetwork[], address: strin
             }
           }
         } catch (error) {
-          console.log('Error while connecting to network ', network.name)
+          if (SEND_EMAIL !== 'true') console.log('Error while connecting to network ', network.name)
         }
       }
     }

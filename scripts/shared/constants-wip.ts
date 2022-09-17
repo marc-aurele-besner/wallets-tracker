@@ -1,5 +1,5 @@
-type Mainnet =  "mainnet"
-type Testnet = "testnet"
+type Mainnet = 'mainnet'
+type Testnet = 'testnet'
 
 type NetworkType = Testnet | Mainnet
 export interface INativeCurrency {
@@ -26,93 +26,93 @@ const nativeCurrency: INativeCurrency[] = [
   {
     network: 'ethereum',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'polygon',
     symbol: 'MATIC',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'bsc',
     symbol: 'BNB',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'optimism',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'avalanche',
     symbol: 'AVAX',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'arbitrum',
     symbol: 'ETH',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'cronos',
     symbol: 'CRO',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'fantom',
     symbol: 'FTM',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'klaytn',
     symbol: 'KLAY',
-    type: "mainnet"
+    type: 'mainnet'
   },
   {
     network: 'kava',
     symbol: 'KAVA',
-    type: "mainnet"
+    type: 'mainnet'
   },
   // Testnet
   {
     network: 'ropstein',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'rinkeby',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'goerli',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'kovan',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'mumbai',
     symbol: 'MATIC',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'bscTest',
     symbol: 'BNB',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'optimismKovan',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   },
   {
     network: 'optimismGoerli',
     symbol: 'ETH',
-    type: "testnet"
+    type: 'testnet'
   }
 ]
 
@@ -268,7 +268,7 @@ export const tokensStablecoin: ITokenStablecoin[] = [
     network: 'optimismGoerli',
     address: '',
     symbol: 'USDC'
-  },
+  }
 ]
 
 export const pairFactory: IPairFactory[] = [

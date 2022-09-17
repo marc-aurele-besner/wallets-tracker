@@ -14,6 +14,8 @@ export interface IWalletBalancesResult {
   fiatSymbol: string
 }
 
+const { SEND_EMAIL } = process.env
+
 const getBalancesOfAddresses = async (networks: INetwork[], addresses: string[]) => {
   let finalResults: IWalletBalancesResult[] = []
   // Loop all networks
@@ -28,7 +30,7 @@ const getBalancesOfAddresses = async (networks: INetwork[], addresses: string[])
           // Get balance
           balance = await provider.getBalance(address)
         } catch (error) {
-          console.log('Error while getting balance for address ', address, ' on network ', network.name)
+          if (SEND_EMAIL !== 'true') console.log('Error while getting balance for address ', address, ' on network ', network.name)
         }
         if (!finalResults[address]) finalResults[address] = []
         // Push result
@@ -45,7 +47,7 @@ const getBalancesOfAddresses = async (networks: INetwork[], addresses: string[])
           })
       }
     } catch (error) {
-      console.log('Error while connecting to network ', network.name)
+      if (SEND_EMAIL !== 'true') console.log('Error while connecting to network ', network.name)
     }
   }
   return finalResults

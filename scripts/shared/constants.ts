@@ -38,6 +38,10 @@ const nativeCurrency: INativeCurrency[] = [
     network: 'avalanche',
     symbol: 'AVAX'
   },
+  {
+    network: 'arbitrum',
+    symbol: 'ETH'
+  },
   // Testnet
   {
     network: 'ropstein',
@@ -132,6 +136,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
   },
   {
     network: 'avalanche',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'arbitrum',
     address: '',
     symbol: 'USDC'
   },
@@ -240,6 +249,24 @@ export const pairFactory: IPairFactory[] = [
     contractName: 'PancakeFactory',
     contractType: 'V2Factory'
   },
+  {
+    network: 'optimism',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'avalanche',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'arbitrum',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  }
   // Testnet
   {
     // Uniswap
@@ -286,7 +313,7 @@ export const pairFactory: IPairFactory[] = [
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'
-  }
+  },
   {
     network: 'optimismGoerli',
     address: '',

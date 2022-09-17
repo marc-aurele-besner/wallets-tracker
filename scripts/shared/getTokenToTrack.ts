@@ -26,6 +26,7 @@ const getTokenToTrack = () => {
     TRACKING_TOKENS_BINANCE,
     TRACKING_TOKENS_OPTIMISM,
     TRACKING_TOKENS_AVALANCHE,
+    TRACKING_TOKENS_ARBITRUM,
     // Public Testnet
     TRACKING_TOKENS_ROPSTEIN,
     TRACKING_TOKENS_RINKEBY,
@@ -43,6 +44,7 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_BINANCE) tokens.push(buildTokenToTrack(TRACKING_TOKENS_BINANCE, 'bsc'))
   if (TRACKING_TOKENS_OPTIMISM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM, 'optimism'))
   if (TRACKING_TOKENS_AVALANCHE) tokens.push(buildTokenToTrack(TRACKING_TOKENS_AVALANCHE, 'avalanche'))
+  if (TRACKING_TOKENS_ARBITRUM) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ARBITRUM, 'arbitrum'))
 
   // Get tokens to track for public testnet
   if (TRACKING_TOKENS_ROPSTEIN) tokens.push(buildTokenToTrack(TRACKING_TOKENS_ROPSTEIN, 'ropstein'))
@@ -52,7 +54,7 @@ const getTokenToTrack = () => {
   if (TRACKING_TOKENS_MUMBAI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_MUMBAI, 'mumbai'))
   if (TRACKING_TOKENS_BINANCE_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_BINANCE_TESTNET, 'bscTest'))
   if (TRACKING_TOKENS_OPTIMISM_TESTNET) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismKovan'))
-  if (TRACKING_TOKENS_OPTIMISM_GOERLI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_TESTNET, 'optimismGoerli'))
+  if (TRACKING_TOKENS_OPTIMISM_GOERLI) tokens.push(buildTokenToTrack(TRACKING_TOKENS_OPTIMISM_GOERLI, 'optimismGoerli'))
 
   return tokens
 }

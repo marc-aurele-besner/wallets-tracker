@@ -12,6 +12,7 @@ const {
   RPC_BINANCE,
   RPC_OPTIMISM,
   RPC_AVALANCHE,
+  RPC_ARBITRUM,
   RPC_ROPSTEIN,
   RPC_RINKEBY,
   RPC_GOERLI,
@@ -65,6 +66,11 @@ const config: HardhatUserConfig = {
         avalanche: {
           chainId: 43114,
           url: `${RPC_AVALANCHE}`,
+          accounts: [`${DUMMY_PRIVATE_KEY}`]
+        },
+        arbitrum: {
+          chainId: 42161,
+          url: `${RPC_ARBITRUM}`,
           accounts: [`${DUMMY_PRIVATE_KEY}`]
         },
         // Testnet

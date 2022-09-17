@@ -6,6 +6,7 @@ import '@nomicfoundation/hardhat-toolbox'
 dotenv.config({ path: __dirname + '/.env.development' })
 
 const {
+  // Mainnet
   DUMMY_PRIVATE_KEY,
   RPC_ETHEREUM,
   RPC_POLYGON,
@@ -16,6 +17,8 @@ const {
   RPC_CHRONOS,
   RPC_FANTOM,
   RPC_KLAYTN,
+  RPC_KAVA,
+  // Testnet
   RPC_ROPSTEIN,
   RPC_RINKEBY,
   RPC_GOERLI,
@@ -46,6 +49,7 @@ const config: HardhatUserConfig = {
   networks: DUMMY_PRIVATE_KEY
     ? {
         hardhat: {},
+        // Mainnet
         ethereum: {
           chainId: 1,
           url: `${RPC_ETHEREUM}`,
@@ -89,6 +93,11 @@ const config: HardhatUserConfig = {
         klaytn: {
           chainId: 8217,
           url: `${RPC_KLAYTN}`,
+          accounts: [`${DUMMY_PRIVATE_KEY}`]
+        },
+        kava: {
+          chainId: 2222,
+          url: `${RPC_KAVA}`,
           accounts: [`${DUMMY_PRIVATE_KEY}`]
         },
         // Testnet

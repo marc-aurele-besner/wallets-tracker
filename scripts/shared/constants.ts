@@ -54,6 +54,10 @@ const nativeCurrency: INativeCurrency[] = [
     network: 'klaytn',
     symbol: 'KLAY'
   },
+  {
+    network: 'kava',
+    symbol: 'KAVA'
+  },
   // Testnet
   {
     network: 'ropstein',
@@ -168,6 +172,11 @@ export const tokensStablecoin: ITokenStablecoin[] = [
   },
   {
     network: 'klaytn',
+    address: '',
+    symbol: 'USDC'
+  },
+  {
+    network: 'kava',
     address: '',
     symbol: 'USDC'
   },
@@ -308,6 +317,12 @@ export const pairFactory: IPairFactory[] = [
   },
   {
     network: 'klaytn',
+    address: '',
+    contractName: 'UniswapV2Factory',
+    contractType: 'V2Factory'
+  },
+  {
+    network: 'kava',
     address: '',
     contractName: 'UniswapV2Factory',
     contractType: 'V2Factory'

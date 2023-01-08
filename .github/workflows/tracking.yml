@@ -4,6 +4,7 @@ on:
   schedule:
     # Runs "at 6h30 am every day" (see https://crontab.guru)
     - cron: '30 6 * * *'
+  pull_request:
   workflow_dispatch:
 
 env:

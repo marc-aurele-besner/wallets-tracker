@@ -92,7 +92,7 @@ jobs:
         run: npm run generateReport
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%d-%m-%Y')"
+        run: echo "name=date=$(date +'%d-%m-%Y')" >> $GITHUB_OUTPUT
       - name: Send Report
         uses: dawidd6/action-send-mail@v3
         with:
@@ -115,7 +115,7 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
-          subject: Wallets Tracker Report ${{steps.date.outputs.date}}
+          subject: Wallets Tracker Report ${{ date }}
           # Required recipients' addresses:
           to: ${{secrets.MAIL_SEND_TO}}
           # Required sender full name (address can be skipped):

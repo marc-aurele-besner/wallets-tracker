@@ -115,7 +115,7 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
-          subject: Wallets Tracker Report ${{ date }}
+          subject: Wallets Tracker Report ${{ steps.date.outputs.date }}
           # Required recipients' addresses:
           to: ${{secrets.MAIL_SEND_TO}}
           # Required sender full name (address can be skipped):

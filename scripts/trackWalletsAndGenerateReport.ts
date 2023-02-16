@@ -42,10 +42,84 @@ async function main() {
     // Get env variables to send email status
     const { SEND_EMAIL } = process.env
     let totalValueAllWallets = ethers.BigNumber.from(0)
-    let totalValueWallet: any[] = []
+    let totalValueWallet: string[] = []
     // Balances list
     for (const address of addresses) {
       totalValueWallet[address] = ethers.BigNumber.from(0)
+      const ethereumLastTx = await helper.getEtherscanLastTx(address, 'txlist')
+      // Ethereum last tx
+      if (ethereumLastTx.length > 0 && SEND_EMAIL === 'true') {
+        exportResults += `
+  
+  ## Ethereum last transaction ${address}
+  
+  ## Networks to track
+  <table>
+    <thead>
+      <tr>
+        <th>BlockNumber</th>
+        <th>TimeStamp</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Value</th>
+        <th>ContractAddress</th>
+        <th>FunctionName</th>
+      </tr>
+    </thead>
+    <tbody>`;
+      for (const transaction of ethereumLastTx) {
+        exportResults += `
+      <tr>
+        <td><small>${transaction.blockNumber}</small></td>
+        <td>${transaction.timeStamp}</td>
+        <td>${transaction.from}</td>
+        <td>${transaction.to}</td>
+        <td>${transaction.value}</td>
+        <td>${transaction.contractAddress}</td>
+        <td>${transaction.functionName}</td>
+      </tr>`;
+      }
+      exportResults += `
+    </tbody>
+  </table>`;
+      }
+      const ethereumLastTxInternal = await helper.getEtherscanLastTx(address, 'txlistinternal')
+      // Ethereum last txInternal
+      if (ethereumLastTxInternal.length > 0 && SEND_EMAIL === 'true') {
+        exportResults += `
+  
+  ## Ethereum last transaction ${address}
+  
+  ## Networks to track
+  <table>
+    <thead>
+      <tr>
+        <th>BlockNumber</th>
+        <th>TimeStamp</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Value</th>
+        <th>ContractAddress</th>
+        <th>Input</th>
+      </tr>
+    </thead>
+    <tbody>`;
+      for (const transaction of ethereumLastTxInternal) {
+        exportResults += `
+      <tr>
+        <td><small>${transaction.blockNumber}</small></td>
+        <td>${transaction.timeStamp}</td>
+        <td>${transaction.from}</td>
+        <td>${transaction.to}</td>
+        <td>${transaction.value}</td>
+        <td>${transaction.contractAddress}</td>
+        <td>${transaction.input}</td>
+      </tr>`;
+      }
+      exportResults += `
+    </tbody>
+  </table>`;
+      }
       const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
         const valueOfCurrency = valueOfCurrencies.find((currency) => currency.chainId === result.chainId)
         const balanceFormatted = ethers.utils.formatEther(result.balance)

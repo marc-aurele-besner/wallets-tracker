@@ -62,12 +62,12 @@ async function main() {
         <th>From</th>
         <th>To</th>
         <th>Value</th>
-        <th>ContractAddress</th>
         <th>FunctionName</th>
       </tr>
     </thead>
     <tbody>`;
       for (const transaction of ethereumLastTx) {
+        if (transaction.blockNumber)
         exportResults += `
       <tr>
         <td><small>${transaction.blockNumber}</small></td>
@@ -75,7 +75,6 @@ async function main() {
         <td>${transaction.from}</td>
         <td>${transaction.to}</td>
         <td>${transaction.value}</td>
-        <td>${transaction.contractAddress}</td>
         <td>${transaction.functionName}</td>
       </tr>`;
       }
@@ -105,6 +104,7 @@ async function main() {
     </thead>
     <tbody>`;
       for (const transaction of ethereumLastTxInternal) {
+        if (transaction.blockNumber)
         exportResults += `
       <tr>
         <td><small>${transaction.blockNumber}</small></td>

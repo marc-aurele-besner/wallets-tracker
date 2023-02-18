@@ -67,7 +67,7 @@ async function main() {
     </thead>
     <tbody>`;
       for (const transaction of ethereumLastTx) {
-        if (transaction.blockNumber)
+        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
         exportResults += `
       <tr>
         <td><small>${transaction.blockNumber}</small></td>
@@ -104,7 +104,7 @@ async function main() {
     </thead>
     <tbody>`;
       for (const transaction of ethereumLastTxInternal) {
-        if (transaction.blockNumber)
+        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
         exportResults += `
       <tr>
         <td><small>${transaction.blockNumber}</small></td>

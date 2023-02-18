@@ -8,6 +8,7 @@ import { ITokensBalancesResult } from './shared/getTokensBalancesOfAddresses'
 const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
   let exportResults = ''
   let countTx = 0
+  try {
   const ethereumLastTx = await helper.getEtherscanLastTx(address, 'txlist')
       // Ethereum last tx
       if (ethereumLastTx.length > 0 && sendEmail === 'true') {
@@ -44,6 +45,9 @@ const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
     </tbody>
   </table>`;
       }
+    } catch (e) {
+      console.log(e)
+    }
   if (countTx > 0) return exportResults
   return ''
 }
@@ -51,6 +55,7 @@ const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
 const renderEtherscanInternalLastTx = async (address: string, sendEmail = 'false') => {
   let exportResults = ''
   let countTx = 0
+  try {
   const ethereumLastTxInternal = await helper.getEtherscanLastTx(address, 'txlistinternal')
       // Ethereum last txInternal
       if (ethereumLastTxInternal.length > 0 && sendEmail === 'true') {
@@ -89,6 +94,9 @@ const renderEtherscanInternalLastTx = async (address: string, sendEmail = 'false
     </tbody>
   </table>`;
       }
+    } catch (e) {
+      console.log(e)
+    }
   if (countTx > 0) return exportResults
   return ''
 }

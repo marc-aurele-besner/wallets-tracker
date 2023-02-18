@@ -2,6 +2,7 @@ import { Wallet } from '@ethersproject/wallet'
 
 import getNetworks, { INetwork } from './getNetworks'
 import getAddressToTrack from './getAddressToTrack'
+import getEtherscanLastTx from './getEtherscanLastTx'
 import getTokenToTrack, { ITokensToTrack } from './getTokenToTrack'
 import getBalancesOfAddresses, { IWalletBalancesResult } from './getBalancesOfAddresses'
 import getTokensBalancesOfAddresses, { ITokensBalancesResult } from './getTokensBalancesOfAddresses'
@@ -14,6 +15,7 @@ import getBalanceValueFormatted from './getBalanceValueFormatted'
 interface IShared {
   getNetworks: () => INetwork[]
   getAddressToTrack: () => string[]
+  getEtherscanLastTx: (address: string, action?: string, startblock?: number, endblock?: number, page?: number, offset?: number, sort?: string) => Promise<any>
   getTokenToTrack: () => ITokensToTrack[]
   getBalancesOfAddresses: (networks: INetwork[], addresses: string[]) => Promise<IWalletBalancesResult[]>
   getTokensBalancesOfAddresses: (networks: INetwork[], address: string, allTokens: ITokensToTrack[]) => Promise<ITokensBalancesResult[]>
@@ -46,6 +48,7 @@ interface IShared {
 const shared: IShared = {
   getNetworks,
   getAddressToTrack,
+  getEtherscanLastTx,
   getTokenToTrack,
   getBalancesOfAddresses,
   getTokensBalancesOfAddresses,

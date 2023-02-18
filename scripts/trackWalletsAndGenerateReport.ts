@@ -5,6 +5,94 @@ import helper from './shared'
 import { IWalletBalancesResult } from './shared/getBalancesOfAddresses'
 import { ITokensBalancesResult } from './shared/getTokensBalancesOfAddresses'
 
+const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
+  let exportResults = ''
+  let countTx = 0
+  const ethereumLastTx = await helper.getEtherscanLastTx(address, 'txlist')
+      // Ethereum last tx
+      if (ethereumLastTx.length > 0 && sendEmail === 'true') {
+        exportResults += `
+  
+## Ethereum last transaction ${address}
+
+  <table>
+    <thead>
+      <tr>
+        <th>BlockNumber</th>
+        <th>TimeStamp</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Value</th>
+        <th>FunctionName</th>
+      </tr>
+    </thead>
+    <tbody>`;
+      for (const transaction of ethereumLastTx) {
+        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
+        exportResults += `
+      <tr>
+        <td><small>${transaction.blockNumber}</small></td>
+        <td>${transaction.timeStamp}</td>
+        <td>${transaction.from}</td>
+        <td>${transaction.to}</td>
+        <td>${transaction.value}</td>
+        <td>${transaction.functionName}</td>
+      </tr>`;
+      countTx += 1
+      }
+      exportResults += `
+    </tbody>
+  </table>`;
+      }
+  if (countTx > 0) return exportResults
+  return ''
+}
+
+const renderEtherscanInternalLastTx = async (address: string, sendEmail = 'false') => {
+  let exportResults = ''
+  let countTx = 0
+  const ethereumLastTxInternal = await helper.getEtherscanLastTx(address, 'txlistinternal')
+      // Ethereum last txInternal
+      if (ethereumLastTxInternal.length > 0 && sendEmail === 'true') {
+        exportResults += `
+  
+  ### Ethereum last transaction (Internal) ${address}
+  
+  <table>
+    <thead>
+      <tr>
+        <th>BlockNumber</th>
+        <th>TimeStamp</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Value</th>
+        <th>ContractAddress</th>
+        <th>Input</th>
+      </tr>
+    </thead>
+    <tbody>`;
+      for (const transaction of ethereumLastTxInternal) {
+        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
+        exportResults += `
+      <tr>
+        <td><small>${transaction.blockNumber}</small></td>
+        <td>${transaction.timeStamp}</td>
+        <td>${transaction.from}</td>
+        <td>${transaction.to}</td>
+        <td>${transaction.value}</td>
+        <td>${transaction.contractAddress}</td>
+        <td>${transaction.input}</td>
+      </tr>`;
+      countTx += 1
+      }
+      exportResults += `
+    </tbody>
+  </table>`;
+      }
+  if (countTx > 0) return exportResults
+  return ''
+}
+
 async function main() {
   const networks = helper.getNetworks()
   const addresses = helper.getAddressToTrack()
@@ -46,80 +134,10 @@ async function main() {
     // Balances list
     for (const address of addresses) {
       totalValueWallet[address] = ethers.BigNumber.from(0)
-      const ethereumLastTx = await helper.getEtherscanLastTx(address, 'txlist')
-      // Ethereum last tx
-      if (ethereumLastTx.length > 0 && SEND_EMAIL === 'true') {
-        exportResults += `
-  
-  ## Ethereum last transaction ${address}
-  
-  ## Networks to track
-  <table>
-    <thead>
-      <tr>
-        <th>BlockNumber</th>
-        <th>TimeStamp</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Value</th>
-        <th>FunctionName</th>
-      </tr>
-    </thead>
-    <tbody>`;
-      for (const transaction of ethereumLastTx) {
-        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
-        exportResults += `
-      <tr>
-        <td><small>${transaction.blockNumber}</small></td>
-        <td>${transaction.timeStamp}</td>
-        <td>${transaction.from}</td>
-        <td>${transaction.to}</td>
-        <td>${transaction.value}</td>
-        <td>${transaction.functionName}</td>
-      </tr>`;
-      }
-      exportResults += `
-    </tbody>
-  </table>`;
-      }
-      const ethereumLastTxInternal = await helper.getEtherscanLastTx(address, 'txlistinternal')
-      // Ethereum last txInternal
-      if (ethereumLastTxInternal.length > 0 && SEND_EMAIL === 'true') {
-        exportResults += `
-  
-  ## Ethereum last transaction ${address}
-  
-  ## Networks to track
-  <table>
-    <thead>
-      <tr>
-        <th>BlockNumber</th>
-        <th>TimeStamp</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Value</th>
-        <th>ContractAddress</th>
-        <th>Input</th>
-      </tr>
-    </thead>
-    <tbody>`;
-      for (const transaction of ethereumLastTxInternal) {
-        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
-        exportResults += `
-      <tr>
-        <td><small>${transaction.blockNumber}</small></td>
-        <td>${transaction.timeStamp}</td>
-        <td>${transaction.from}</td>
-        <td>${transaction.to}</td>
-        <td>${transaction.value}</td>
-        <td>${transaction.contractAddress}</td>
-        <td>${transaction.input}</td>
-      </tr>`;
-      }
-      exportResults += `
-    </tbody>
-  </table>`;
-      }
+      exportResults += await renderEtherscanLastTx(address, SEND_EMAIL)
+      exportResults += await renderEtherscanInternalLastTx(address, SEND_EMAIL)
+      
+      
       const balancesList = walletBalancesResult[address].map((result: IWalletBalancesResult) => {
         const valueOfCurrency = valueOfCurrencies.find((currency) => currency.chainId === result.chainId)
         const balanceFormatted = ethers.utils.formatEther(result.balance)

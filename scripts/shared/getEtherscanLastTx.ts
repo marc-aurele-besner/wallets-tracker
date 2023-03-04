@@ -59,7 +59,7 @@ const getEtherscanLastTx = async (
   if (!sort) sort = 'desc'
 
   if (action !== 'txlist' && action !== 'txlistinternal') throw new Error(`Invalid action: ${action}`)
-  if (sort !== 'desc' && sort !== 'arc') throw new Error(`Invalid sortint: ${sort}`)
+  if (sort !== 'desc' && sort !== 'asc') throw new Error(`Invalid sortint: ${sort}`)
 
   const api = `https://api.etherscan.io/api?module=account&action=${action}&address=${address}&startblock=${startblock}&endblock=${endblock}&page=${page}&offset=${offset}&sort=${sort}&apikey=${ETHERSCAN_API_KEY}`
 

@@ -6,13 +6,13 @@ import { IWalletBalancesResult } from './shared/getBalancesOfAddresses'
 import { ITokensBalancesResult } from './shared/getTokensBalancesOfAddresses'
 
 const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
-  let exportResults = ''
+  let buildExportResults = ''
   let countTx = 0
   try {
-  const ethereumLastTx = await helper.getEtherscanLastTx(address, 'txlist')
-      // Ethereum last tx
-      if (ethereumLastTx.length > 0 && sendEmail === 'true') {
-        exportResults += `
+    const ethereumLastTx = await helper.getEtherscanLastTx(address, 'txlist')
+    // Ethereum last tx
+    if (ethereumLastTx.length > 0 && sendEmail === 'true') {
+      buildExportResults += `
   
 ## Ethereum last transaction ${address}
 
@@ -30,7 +30,7 @@ const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
     <tbody>`;
       for (const transaction of ethereumLastTx) {
         if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
-        exportResults += `
+        buildExportResults += `
       <tr>
         <td><small>${transaction.blockNumber}</small></td>
         <td>${transaction.timeStamp}</td>
@@ -41,25 +41,25 @@ const renderEtherscanLastTx = async (address: string, sendEmail = 'false') => {
       </tr>`;
       countTx += 1
       }
-      exportResults += `
+      buildExportResults += `
     </tbody>
   </table>`;
-      }
-    } catch (e) {
-      console.log(e)
     }
-  if (countTx > 0) return exportResults
+  } catch (e) {
+    console.log(e)
+  }
+  if (countTx > 0) return buildExportResults
   return ''
 }
 
 const renderEtherscanInternalLastTx = async (address: string, sendEmail = 'false') => {
-  let exportResults = ''
+  let buildExportResults = ''
   let countTx = 0
   try {
   const ethereumLastTxInternal = await helper.getEtherscanLastTx(address, 'txlistinternal')
-      // Ethereum last txInternal
-      if (ethereumLastTxInternal.length > 0 && sendEmail === 'true') {
-        exportResults += `
+  // Ethereum last txInternal
+  if (ethereumLastTxInternal.length > 0 && sendEmail === 'true') {
+    buildExportResults += `
   
   ### Ethereum last transaction (Internal) ${address}
   
@@ -76,9 +76,9 @@ const renderEtherscanInternalLastTx = async (address: string, sendEmail = 'false
       </tr>
     </thead>
     <tbody>`;
-      for (const transaction of ethereumLastTxInternal) {
-        if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
-        exportResults += `
+    for (const transaction of ethereumLastTxInternal) {
+      if (transaction.blockNumber && transaction.timeStamp && transaction.timeStamp >= Date.now() / 1000 - (60 * 60 * 24 * 7))
+      buildExportResults += `
       <tr>
         <td><small>${transaction.blockNumber}</small></td>
         <td>${transaction.timeStamp}</td>
@@ -89,15 +89,15 @@ const renderEtherscanInternalLastTx = async (address: string, sendEmail = 'false
         <td>${transaction.input}</td>
       </tr>`;
       countTx += 1
-      }
-      exportResults += `
+    }
+    buildExportResults += `
     </tbody>
   </table>`;
-      }
-    } catch (e) {
-      console.log(e)
     }
-  if (countTx > 0) return exportResults
+  } catch (e) {
+    console.log(e)
+  }
+  if (countTx > 0) return buildExportResults
   return ''
 }
 

@@ -48,6 +48,7 @@
   },
   "overrides": {
     "adm-zip": "^0.6.0",
+    "cookie": "^0.7.0",
     "elliptic": "^6.6.1",
     "lodash": "^4.18.0",
     "pbkdf2": "^3.1.3",

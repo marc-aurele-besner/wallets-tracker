@@ -47,6 +47,7 @@
     "typescript": "^5.0.0"
   },
   "overrides": {
+    "adm-zip": "^0.6.0",
     "elliptic": "^6.6.1",
     "pbkdf2": "^3.1.3"
   }

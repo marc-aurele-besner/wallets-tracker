@@ -27,7 +27,7 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^7.0.0",
     "@openzeppelin/contracts-upgradeable": "^5.0.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "awesome-readme": "^1.0.0",
